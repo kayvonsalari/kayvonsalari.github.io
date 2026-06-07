@@ -1,763 +1,594 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kayvon Salari — Agentic AI & Enterprise Architecture</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --ink: #0f0e0d;
-    --ink-2: #3a3835;
-    --ink-3: #7a7570;
-    --paper: #f7f4ef;
-    --paper-2: #edeae3;
-    --paper-3: #e2ddd5;
-    --accent: #c8401a;
-    --accent-2: #e8a87c;
-    --line: rgba(15,14,13,0.12);
-    --mono: 'DM Mono', monospace;
-    --serif: 'DM Serif Display', serif;
-    --sans: 'DM Sans', sans-serif;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: var(--sans);
-    font-size: 16px;
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 1.25rem 3rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(247,244,239,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--line);
-  }
-
-  .nav-logo {
-    font-family: var(--mono);
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--ink-3);
-    letter-spacing: 0.04em;
-    text-decoration: none;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-  }
-
-  .nav-links a {
-    font-family: var(--mono);
-    font-size: 12px;
-    font-weight: 400;
-    color: var(--ink-3);
-    text-decoration: none;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
-
-  .nav-links a:hover { color: var(--accent); }
-
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding-top: 80px;
-  }
-
-  .hero-left {
-    padding: 8rem 3rem 6rem 3rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border-right: 1px solid var(--line);
-  }
-
-  .hero-tag {
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--accent);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 2rem;
-  }
-
-  .hero-name {
-    font-family: var(--serif);
-    font-size: clamp(3.5rem, 6vw, 5.5rem);
-    line-height: 1.0;
-    color: var(--ink);
-    margin-bottom: 1.5rem;
-  }
-
-  .hero-name em {
-    font-style: italic;
-    color: var(--accent);
-  }
-
-  .hero-desc {
-    font-size: 17px;
-    font-weight: 300;
-    color: var(--ink-2);
-    line-height: 1.7;
-    max-width: 480px;
-    margin-bottom: 3rem;
-  }
-
-  .hero-cta {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.875rem 1.75rem;
-    background: var(--ink);
-    color: var(--paper);
-    font-family: var(--mono);
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.15s;
-  }
-
-  .btn-primary:hover { background: var(--accent); transform: translateY(-1px); }
-
-  .btn-secondary {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.875rem 1.75rem;
-    background: transparent;
-    color: var(--ink);
-    font-family: var(--mono);
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border: 1px solid var(--ink);
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .btn-secondary:hover { background: var(--ink); color: var(--paper); }
-
-  .hero-right {
-    padding: 8rem 3rem 6rem 4rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 0;
-  }
-
-  .stat-row {
-    padding: 2rem 0;
-    border-bottom: 1px solid var(--line);
-    display: grid;
-    grid-template-columns: 80px 1fr;
-    gap: 1.5rem;
-    align-items: start;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeUp 0.6s forwards;
-  }
-
-  .stat-row:nth-child(1) { animation-delay: 0.2s; }
-  .stat-row:nth-child(2) { animation-delay: 0.35s; }
-  .stat-row:nth-child(3) { animation-delay: 0.5s; }
-  .stat-row:nth-child(4) { animation-delay: 0.65s; }
-
-  @keyframes fadeUp {
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .stat-num {
-    font-family: var(--serif);
-    font-size: 2.8rem;
-    line-height: 1;
-    color: var(--accent);
-  }
-
-  .stat-label {
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--ink-2);
-    padding-top: 0.4rem;
-  }
-
-  .stat-sub {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--ink-3);
-    margin-top: 0.25rem;
-    letter-spacing: 0.04em;
-  }
-
-  /* SECTION SHARED */
-  section {
-    padding: 7rem 3rem;
-    border-top: 1px solid var(--line);
-  }
-
-  .section-header {
-    display: flex;
-    align-items: baseline;
-    gap: 1.5rem;
-    margin-bottom: 4rem;
-  }
-
-  .section-tag {
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--accent);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-
-  .section-title {
-    font-family: var(--serif);
-    font-size: clamp(2rem, 3.5vw, 3rem);
-    color: var(--ink);
-    line-height: 1.1;
-  }
-
-  .section-line {
-    flex: 1;
-    height: 1px;
-    background: var(--line);
-    margin-left: 1rem;
-  }
-
-  /* PROJECTS */
-  #projects { background: var(--paper); }
-
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 0;
-    border: 1px solid var(--line);
-  }
-
-  .project-card {
-    padding: 2.5rem;
-    border-right: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    background: var(--paper);
-    transition: background 0.25s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .project-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 3px;
-    height: 0;
-    background: var(--accent);
-    transition: height 0.3s ease;
-  }
-
-  .project-card:hover { background: var(--paper-2); }
-  .project-card:hover::before { height: 100%; }
-
-  .project-domain {
-    font-family: var(--mono);
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent);
-  }
-
-  .project-title {
-    font-family: var(--serif);
-    font-size: 1.5rem;
-    line-height: 1.2;
-    color: var(--ink);
-  }
-
-  .project-desc {
-    font-size: 14px;
-    font-weight: 300;
-    color: var(--ink-2);
-    line-height: 1.65;
-    flex: 1;
-  }
-
-  .project-tech {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin-top: 0.5rem;
-  }
-
-  .tech-tag {
-    font-family: var(--mono);
-    font-size: 10px;
-    padding: 0.25rem 0.6rem;
-    background: var(--paper-3);
-    color: var(--ink-3);
-    letter-spacing: 0.04em;
-  }
-
-  .project-arrow {
-    font-size: 20px;
-    color: var(--ink-3);
-    transition: color 0.2s, transform 0.2s;
-    align-self: flex-end;
-    margin-top: 0.5rem;
-  }
-
-  .project-card:hover .project-arrow {
-    color: var(--accent);
-    transform: translate(4px, -4px);
-  }
-
-  /* ABOUT */
-  #about { background: var(--paper-2); }
-
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-  }
-
-  .about-text p {
-    font-size: 17px;
-    font-weight: 300;
-    color: var(--ink-2);
-    line-height: 1.8;
-    margin-bottom: 1.5rem;
-  }
-
-  .about-text p strong {
-    color: var(--ink);
-    font-weight: 500;
-  }
-
-  .credentials {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .credential-item {
-    padding: 1.5rem 0;
-    border-bottom: 1px solid var(--line);
-    display: grid;
-    grid-template-columns: 40px 1fr;
-    gap: 1rem;
-    align-items: start;
-  }
-
-  .credential-icon {
-    font-family: var(--mono);
-    font-size: 18px;
-    color: var(--accent);
-    padding-top: 2px;
-  }
-
-  .credential-name {
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--ink);
-    margin-bottom: 0.2rem;
-  }
-
-  .credential-detail {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--ink-3);
-    letter-spacing: 0.04em;
-  }
-
-  /* CONTACT */
-  #contact { background: var(--ink); }
-
-  #contact .section-title { color: var(--paper); }
-  #contact .section-tag { color: var(--accent-2); }
-  #contact .section-line { background: rgba(247,244,239,0.15); }
-
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: start;
-  }
-
-  .contact-text {
-    font-family: var(--serif);
-    font-size: clamp(1.8rem, 3vw, 2.5rem);
-    color: var(--paper);
-    line-height: 1.2;
-  }
-
-  .contact-text em {
-    font-style: italic;
-    color: var(--accent-2);
-  }
-
-  .contact-links {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .contact-link {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.5rem 0;
-    border-bottom: 1px solid rgba(247,244,239,0.1);
-    text-decoration: none;
-    transition: padding-left 0.2s;
-  }
-
-  .contact-link:hover { padding-left: 0.75rem; }
-
-  .contact-link-label {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(247,244,239,0.4);
-    margin-bottom: 0.25rem;
-  }
-
-  .contact-link-value {
-    font-size: 16px;
-    font-weight: 400;
-    color: var(--paper);
-  }
-
-  .contact-link-arrow {
-    font-size: 20px;
-    color: rgba(247,244,239,0.3);
-    transition: color 0.2s;
-  }
-
-  .contact-link:hover .contact-link-arrow { color: var(--accent-2); }
-
-  /* FOOTER */
-  footer {
-    background: var(--ink);
-    padding: 2rem 3rem;
-    border-top: 1px solid rgba(247,244,239,0.08);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  footer p {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: rgba(247,244,239,0.25);
-    letter-spacing: 0.04em;
-  }
-
-  /* SCROLL ANIMATIONS */
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* RESPONSIVE */
-  @media (max-width: 900px) {
-    nav { padding: 1rem 1.5rem; }
-    .hero { grid-template-columns: 1fr; }
-    .hero-left { border-right: none; padding: 6rem 1.5rem 3rem; }
-    .hero-right { padding: 2rem 1.5rem 4rem; }
-    section { padding: 5rem 1.5rem; }
-    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
-    .projects-grid { grid-template-columns: 1fr; }
-    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kayvon Salari — Agentic AI & Enterprise Architecture</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #1a1916;
+      --ink-mid: #4a4845;
+      --ink-light: #8a8784;
+      --paper: #f7f5f0;
+      --paper-warm: #ede9e0;
+      --accent: #c4622d;
+      --accent-pale: #f5ede7;
+      --rule: #d8d4cb;
+      --tag-bg: #e8e4da;
+      --tag-text: #4a4845;
+      --card-bg: #ffffff;
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+      --max: 1100px;
+      --gap: clamp(1.25rem, 4vw, 2.5rem);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(247,245,240,0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--gap);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--ink-mid);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: clamp(4rem, 10vw, 8rem) var(--gap) clamp(3rem, 6vw, 5rem);
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 4rem;
+      align-items: end;
+    }
+    @media (max-width: 700px) {
+      .hero { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 6vw, 4.4rem);
+      line-height: 1.04;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+    }
+    h1 em { font-style: italic; color: var(--accent); }
+    .hero-sub {
+      margin-top: 1.4rem;
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--ink-mid);
+      max-width: 42ch;
+      line-height: 1.75;
+    }
+    .hero-cta {
+      margin-top: 2.2rem;
+      display: flex;
+      gap: 0.85rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.3rem;
+      border-radius: 3px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: all 0.15s;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: #a84f23; }
+    .btn-ghost { border: 1.5px solid var(--rule); color: var(--ink-mid); }
+    .btn-ghost:hover { border-color: var(--ink-mid); color: var(--ink); }
+
+    /* ── STATS ── */
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .stat {
+      padding: 1.2rem 1.3rem;
+      background: var(--card-bg);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+    }
+    .stat-num {
+      font-family: var(--serif);
+      font-size: 2rem;
+      line-height: 1;
+      color: var(--accent);
+      letter-spacing: -0.02em;
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--ink-mid);
+      margin-top: 0.3rem;
+      line-height: 1.4;
+    }
+    .stat-sub {
+      font-size: 0.7rem;
+      color: var(--ink-light);
+      margin-top: 0.2rem;
+      line-height: 1.4;
+    }
+
+    /* ── SECTION SHELL ── */
+    .section-rule { border: none; border-top: 1px solid var(--rule); }
+
+    section { padding: clamp(3rem, 7vw, 5rem) var(--gap); }
+    .section-inner { max-width: var(--max); margin: 0 auto; }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .section-label span { color: var(--ink-light); margin-right: 0.6em; }
+
+    h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── PROJECT GRID ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1.5px solid var(--rule);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    @media (max-width: 900px) {
+      .projects-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 580px) {
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: var(--card-bg);
+      padding: 1.6rem 1.6rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      border-right: 1.5px solid var(--rule);
+      border-bottom: 1.5px solid var(--rule);
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.15s;
+    }
+    .card:hover { background: var(--accent-pale); }
+    .card:hover .card-arrow { transform: translate(3px, -3px); }
+
+    .card-sector {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.7rem;
+    }
+    .card-title {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      line-height: 1.25;
+      color: var(--ink);
+      margin-bottom: 0.7rem;
+      letter-spacing: -0.01em;
+    }
+    .card-desc {
+      font-size: 0.845rem;
+      color: var(--ink-mid);
+      line-height: 1.65;
+      flex: 1;
+    }
+    .card-tags {
+      margin-top: 1.1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+    .tag {
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      font-size: 0.65rem;
+      font-weight: 500;
+      padding: 0.22rem 0.5rem;
+      border-radius: 2px;
+      letter-spacing: 0.03em;
+    }
+    .card-footer {
+      margin-top: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .card-note {
+      font-size: 0.68rem;
+      color: var(--ink-light);
+      font-style: italic;
+    }
+    .card-arrow {
+      font-size: 0.9rem;
+      color: var(--accent);
+      transition: transform 0.2s;
+      flex-shrink: 0;
+    }
+
+    /* ── ABOUT ── */
+    .about-section {
+      background: var(--paper-warm);
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    @media (max-width: 700px) { .about-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+    .about-text p {
+      font-size: 0.975rem;
+      color: var(--ink-mid);
+      line-height: 1.8;
+      margin-bottom: 1.1rem;
+    }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-text strong { color: var(--ink); font-weight: 500; }
+
+    .certs { display: flex; flex-direction: column; gap: 0.85rem; }
+    .cert {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      padding: 0.9rem 1rem;
+      background: var(--card-bg);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+    }
+    .cert-icon { font-size: 0.9rem; color: var(--accent); margin-top: 0.1rem; flex-shrink: 0; }
+    .cert-name { font-size: 0.85rem; font-weight: 500; color: var(--ink); line-height: 1.3; }
+    .cert-sub { font-size: 0.72rem; color: var(--ink-light); margin-top: 0.15rem; }
+
+    /* ── CONTACT ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+    @media (max-width: 560px) { .contact-grid { grid-template-columns: 1fr; } }
+
+    .contact-card {
+      display: flex;
+      flex-direction: column;
+      padding: 1.4rem 1.6rem;
+      background: var(--card-bg);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.15s;
+    }
+    .contact-card:hover { border-color: var(--accent); }
+    .contact-platform {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 0.3rem;
+    }
+    .contact-handle {
+      font-family: var(--serif);
+      font-size: 1rem;
+      color: var(--accent);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 1.75rem var(--gap);
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--ink-light);
+    }
+  </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">kayvonsalari.github.io</a>
-  <ul class="nav-links">
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">kayvonsalari.github.io</a>
+    <ul class="nav-links">
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero" style="border-top: none; padding: 0;">
-  <div class="hero-left">
-    <p class="hero-tag">Agentic AI · Enterprise Architecture · Data</p>
-    <h1 class="hero-name">Kayvon<br><em>Salari</em></h1>
-    <p class="hero-desc">Senior Data & Enterprise Architect with 25+ years building large-scale platforms for European and global organisations. Now designing and building multi-agent AI systems that solve real enterprise problems.</p>
-    <div class="hero-cta">
-      <a href="#projects" class="btn-primary">View Projects →</a>
-      <a href="https://github.com/kayvonsalari" target="_blank" class="btn-secondary">GitHub ↗</a>
+<main>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div>
+      <p class="hero-eyebrow">Agentic AI · Enterprise Architecture · Data</p>
+      <h1>Kayvon <em>Salari</em></h1>
+      <p class="hero-sub">Senior Data &amp; Enterprise Architect with 25+ years building large-scale platforms for European and global organisations. Now designing and building multi-agent AI systems that solve real enterprise problems.</p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">View Projects →</a>
+        <a href="https://github.com/kayvonsalari" target="_blank" rel="noopener" class="btn btn-ghost">GitHub ↗</a>
+      </div>
     </div>
-  </div>
-  <div class="hero-right">
-    <div class="stat-row">
-      <div class="stat-num">25+</div>
-      <div>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-num">25+</div>
         <div class="stat-label">Years enterprise architecture</div>
         <div class="stat-sub">Sky Germany · Lufthansa · Bayer · HP · Deutsche Telekom · Volkswagen</div>
       </div>
-    </div>
-    <div class="stat-row">
-      <div class="stat-num">5</div>
-      <div>
+      <div class="stat">
+        <div class="stat-num">9</div>
         <div class="stat-label">Agentic AI systems built</div>
         <div class="stat-sub">LangGraph · LangChain · RAG · Reinforcement Learning</div>
       </div>
-    </div>
-    <div class="stat-row">
-      <div class="stat-num">3</div>
-      <div>
+      <div class="stat">
+        <div class="stat-num">3</div>
         <div class="stat-label">Cloud certifications</div>
         <div class="stat-sub">GCP · Azure · TOGAF 10 · SAFe for Architects</div>
       </div>
-    </div>
-    <div class="stat-row">
-      <div class="stat-num">JHU</div>
-      <div>
+      <div class="stat">
+        <div class="stat-num">JHU</div>
         <div class="stat-label">Agentic AI Architecture</div>
         <div class="stat-sub">Johns Hopkins University — in progress</div>
       </div>
     </div>
   </div>
-</section>
 
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="section-header">
-    <span class="section-tag">01</span>
-    <h2 class="section-title">Agentic AI Projects</h2>
-    <div class="section-line"></div>
-  </div>
+  <hr class="section-rule" />
 
-  <div class="projects-grid">
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-inner">
+      <p class="section-label"><span>01</span>Agentic AI Projects</p>
+      <h2>Multi-Agent Systems</h2>
+      <div class="projects-grid">
 
-    <a href="https://github.com/kayvonsalari/duallens-analytics" target="_blank" class="project-card reveal">
-      <div class="project-domain">Investment Research</div>
-      <h3 class="project-title">AI-Powered Investment Research Platform</h3>
-      <p class="project-desc">RAG-powered system that combines 3-year stock performance data with insights extracted from strategy PDFs — ranking companies by both financial strength and AI innovation readiness. Eliminates the manual cross-referencing that consumes analyst time.</p>
-      <div class="project-tech">
-        <span class="tech-tag">RAG</span>
-        <span class="tech-tag">LangChain</span>
-        <span class="tech-tag">ChromaDB</span>
-        <span class="tech-tag">Yahoo Finance</span>
-        <span class="tech-tag">OpenAI</span>
-      </div>
-      <div class="project-arrow">↗</div>
-    </a>
+        <a class="card" href="https://github.com/kayvonsalari/duallens-analytics" target="_blank" rel="noopener">
+          <div class="card-sector">Investment Research</div>
+          <div class="card-title">AI-Powered Investment Research Platform</div>
+          <p class="card-desc">RAG-powered system that combines 3-year stock performance data with insights extracted from strategy PDFs — ranking companies by both financial strength and AI innovation readiness. Eliminates the manual cross-referencing that consumes analyst time.</p>
+          <div class="card-tags">
+            <span class="tag">RAG</span><span class="tag">LangChain</span><span class="tag">ChromaDB</span><span class="tag">Yahoo Finance</span><span class="tag">OpenAI</span>
+          </div>
+          <div class="card-footer"><span class="card-note"></span><span class="card-arrow">↗</span></div>
+        </a>
 
-    <a href="https://github.com/kayvonsalari/financial-research-analyst" target="_blank" class="project-card reveal">
-      <div class="project-domain">Investment Intelligence</div>
-      <h3 class="project-title">Autonomous Financial Research Analyst</h3>
-      <p class="project-desc">LangGraph agent that reduces per-company investment research from 4–6 hours to minutes. Proactively gathers real-time stock data, news sentiment, and private analyst report insights — producing auditable Buy/Hold/Sell recommendations with cited sources.</p>
-      <div class="project-tech">
-        <span class="tech-tag">LangGraph</span>
-        <span class="tech-tag">LangChain</span>
-        <span class="tech-tag">Tavily</span>
-        <span class="tech-tag">RAG</span>
-        <span class="tech-tag">OpenAI</span>
-      </div>
-      <div class="project-arrow">↗</div>
-    </a>
+        <a class="card" href="https://github.com/kayvonsalari/financial-research-analyst" target="_blank" rel="noopener">
+          <div class="card-sector">Investment Intelligence</div>
+          <div class="card-title">Autonomous Financial Research Analyst</div>
+          <p class="card-desc">LangGraph agent that reduces per-company investment research from 4–6 hours to minutes. Proactively gathers real-time stock data, news sentiment, and private analyst report insights — producing auditable Buy/Hold/Sell recommendations with cited sources.</p>
+          <div class="card-tags">
+            <span class="tag">LangGraph</span><span class="tag">LangChain</span><span class="tag">Tavily</span><span class="tag">RAG</span><span class="tag">OpenAI</span>
+          </div>
+          <div class="card-footer"><span class="card-note"></span><span class="card-arrow">↗</span></div>
+        </a>
 
-    <a href="https://github.com/kayvonsalari/mortgage-underwriting-agent" target="_blank" class="project-card reveal">
-      <div class="project-domain">Financial Services</div>
-      <h3 class="project-title">Senior Mortgage Underwriting System</h3>
-      <p class="project-desc">Multi-agent system with Credit, Income, Asset and Collateral specialist agents coordinated by a Supervisor. Reduces underwriting from 3–5 days to hours with full Fair Lending Act compliance, PII protection, bias detection, and mandatory human-in-the-loop escalation.</p>
-      <div class="project-tech">
-        <span class="tech-tag">LangGraph</span>
-        <span class="tech-tag">Multi-Agent</span>
-        <span class="tech-tag">RAG</span>
-        <span class="tech-tag">ChromaDB</span>
-        <span class="tech-tag">Human-in-the-loop</span>
-      </div>
-      <div class="project-arrow">↗</div>
-    </a>
+        <a class="card" href="https://github.com/kayvonsalari/mortgage-underwriting-agent" target="_blank" rel="noopener">
+          <div class="card-sector">Financial Services</div>
+          <div class="card-title">Senior Mortgage Underwriting System</div>
+          <p class="card-desc">Multi-agent system with Credit, Income, Asset and Collateral specialist agents coordinated by a Supervisor. Reduces underwriting from 3–5 days to hours with full Fair Lending Act compliance, PII protection, bias detection, and mandatory human-in-the-loop escalation.</p>
+          <div class="card-tags">
+            <span class="tag">LangGraph</span><span class="tag">Multi-Agent</span><span class="tag">RAG</span><span class="tag">ChromaDB</span><span class="tag">HITL</span>
+          </div>
+          <div class="card-footer"><span class="card-note"></span><span class="card-arrow">↗</span></div>
+        </a>
 
-    <a href="https://github.com/kayvonsalari/ms-risk-screening-agent" target="_blank" class="project-card reveal">
-      <div class="project-domain">Clinical Decision Support</div>
-      <h3 class="project-title">MS Risk Screening Agent</h3>
-      <p class="project-desc">Multi-agent system that scans EHR records to surface patients showing early MS risk signals — flagging for neurologist review without replacing clinical judgement. Implements adjustable autonomy, transparent flagging rationale, and PHI governance throughout.</p>
-      <div class="project-tech">
-        <span class="tech-tag">Multi-Agent HAI</span>
-        <span class="tech-tag">EHR Simulation</span>
-        <span class="tech-tag">Responsible AI</span>
-        <span class="tech-tag">LangChain</span>
-      </div>
-      <div class="project-arrow">↗</div>
-    </a>
+        <a class="card" href="https://github.com/kayvonsalari/ms-risk-screening-agent" target="_blank" rel="noopener">
+          <div class="card-sector">Clinical Decision Support</div>
+          <div class="card-title">MS Risk Screening Agent</div>
+          <p class="card-desc">Multi-agent system that scans EHR records to surface patients showing early MS risk signals — flagging for neurologist review without replacing clinical judgement. Implements adjustable autonomy, transparent flagging rationale, and PHI governance throughout.</p>
+          <div class="card-tags">
+            <span class="tag">Multi-Agent</span><span class="tag">HAI</span><span class="tag">EHR Simulation</span><span class="tag">Responsible AI</span><span class="tag">LangChain</span>
+          </div>
+          <div class="card-footer"><span class="card-note"></span><span class="card-arrow">↗</span></div>
+        </a>
 
-    <a href="https://github.com/kayvonsalari/warehouse-robot-navigation" target="_blank" class="project-card reveal">
-      <div class="project-domain">Logistics & Robotics</div>
-      <h3 class="project-title">Warehouse Robot Navigation</h3>
-      <p class="project-desc">Reinforcement learning agent that teaches autonomous mobile robots optimal pathfinding without manual programming. Using Proximal Policy Optimization (PPO), the agent learns goal-directed navigation from scratch and generalises to layouts it has never seen.</p>
-      <div class="project-tech">
-        <span class="tech-tag">Reinforcement Learning</span>
-        <span class="tech-tag">PPO</span>
-        <span class="tech-tag">OpenAI Gym</span>
-        <span class="tech-tag">Stable Baselines 3</span>
-      </div>
-      <div class="project-arrow">↗</div>
-    </a>
+        <a class="card" href="https://github.com/kayvonsalari/agi-research-intelligence" target="_blank" rel="noopener">
+          <div class="card-sector">Research Intelligence</div>
+          <div class="card-title">AGI Research Intelligence Platform</div>
+          <p class="card-desc">Hierarchical multi-agent system that automates discovery and evaluation of AGI-relevant research from arXiv. A Planner, Discovery, and Evaluation agent pipeline applies a standardised 10-parameter AGI scoring framework — reducing literature review from weeks to hours with 3–5× coverage of manual methods.</p>
+          <div class="card-tags">
+            <span class="tag">LangGraph</span><span class="tag">Multi-Agent</span><span class="tag">arXiv API</span><span class="tag">OpenAI</span>
+          </div>
+          <div class="card-footer"><span class="card-note"></span><span class="card-arrow">↗</span></div>
+        </a>
 
-  </div>
-</section>
+        <a class="card" href="https://github.com/kayvonsalari/linkedin-post-generator" target="_blank" rel="noopener">
+          <div class="card-sector">Content Intelligence</div>
+          <div class="card-title">LinkedIn Post Generator</div>
+          <p class="card-desc">Multi-agent pipeline that generates, refines, and evaluates LinkedIn content through specialised agents: Researcher gathers background material, Writer drafts posts, Critic scores against a quality rubric, and a Supervisor orchestrates the loop until approval.</p>
+          <div class="card-tags">
+            <span class="tag">LangGraph</span><span class="tag">Multi-Agent</span><span class="tag">LangChain</span><span class="tag">OpenAI</span>
+          </div>
+          <div class="card-footer"><span class="card-note"></span><span class="card-arrow">↗</span></div>
+        </a>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="section-header">
-    <span class="section-tag">02</span>
-    <h2 class="section-title">Background</h2>
-    <div class="section-line"></div>
-  </div>
+        <a class="card" href="https://github.com/kayvonsalari/healthcare-intelligence-assistant" target="_blank" rel="noopener">
+          <div class="card-sector">Healthcare · Data Governance</div>
+          <div class="card-title">Healthcare Intelligence Assistant</div>
+          <p class="card-desc">Natural Language-to-SQL system that lets clinicians query databases without SQL expertise. LangGraph classifies every query as READ (auto-execute), WRITE (human approval required), or UNSAFE (rejected outright) — eliminating DBA bottlenecks while maintaining HIPAA and GDPR compliance through full audit trails.</p>
+          <div class="card-tags">
+            <span class="tag">LangGraph</span><span class="tag">NL-to-SQL</span><span class="tag">HITL</span><span class="tag">HIPAA</span><span class="tag">GDPR</span>
+          </div>
+          <div class="card-footer"><span class="card-note"></span><span class="card-arrow">↗</span></div>
+        </a>
 
-  <div class="about-grid">
-    <div class="about-text reveal">
-      <p>I've spent 25+ years designing and delivering large-scale data platforms and enterprise architecture across some of Europe's largest organisations — <strong>Sky Germany, Lufthansa, Bayer, HP, and Deutsche Telekom</strong>, among others.</p>
-      <p>As <strong>Head of Data Architecture at Sky Germany</strong>, I built two international teams from scratch, migrated on-premise Cloudera infrastructure to GCP delivering over €1M in annual savings, and eliminated 100% dependency on external consultancies.</p>
-      <p>I co-founded <strong>Zeal Hub GmbH</strong>, a boutique data and BI consultancy, running enterprise data platform engagements independently for five years.</p>
-      <p>I'm now completing advanced <strong>Agentic AI Architecture training at Johns Hopkins University</strong> — applying that foundation to build multi-agent systems that solve real enterprise problems across finance, healthcare, and logistics.</p>
-    </div>
+        <a class="card" href="https://github.com/kayvonsalari/mucatlas" target="_blank" rel="noopener">
+          <div class="card-sector">Public Sector · Knowledge Management</div>
+          <div class="card-title">MucAtlas — Municipal Knowledge Agent</div>
+          <p class="card-desc">Submitted to the Munich Innovation Challenge 2026. Five-agent RAG system for Munich city administration that connects fragmented internal knowledge sources, validates legal document currency, detects source contradictions, and delivers cited answers to caseworkers in seconds. Full data sovereignty via confidential computing on Privatemode.</p>
+          <div class="card-tags">
+            <span class="tag">Multi-Agent</span><span class="tag">RAG</span><span class="tag">Confidential Computing</span><span class="tag">MCP</span><span class="tag">GDPR</span>
+          </div>
+          <div class="card-footer"><span class="card-note">Architecture &amp; design — competition entry</span><span class="card-arrow">↗</span></div>
+        </a>
 
-    <div class="credentials reveal">
-      <div class="credential-item">
-        <div class="credential-icon">◈</div>
-        <div>
-          <div class="credential-name">TOGAF 10 Certified</div>
-          <div class="credential-detail">Enterprise Architecture · Sep 2024</div>
-        </div>
-      </div>
-      <div class="credential-item">
-        <div class="credential-icon">◈</div>
-        <div>
-          <div class="credential-name">Google Cloud Certified</div>
-          <div class="credential-detail">GCP Professional Data Engineer</div>
-        </div>
-      </div>
-      <div class="credential-item">
-        <div class="credential-icon">◈</div>
-        <div>
-          <div class="credential-name">Microsoft Azure Certified</div>
-          <div class="credential-detail">Azure Data & Cloud Architecture</div>
-        </div>
-      </div>
-      <div class="credential-item">
-        <div class="credential-icon">◈</div>
-        <div>
-          <div class="credential-name">SAFe for Architects</div>
-          <div class="credential-detail">Scaled Agile Framework</div>
-        </div>
-      </div>
-      <div class="credential-item">
-        <div class="credential-icon">◈</div>
-        <div>
-          <div class="credential-name">Agentic AI Architecture</div>
-          <div class="credential-detail">Johns Hopkins University / eCornell · In progress</div>
-        </div>
+        <a class="card" href="https://github.com/kayvonsalari/warehouse-robot-navigation" target="_blank" rel="noopener">
+          <div class="card-sector">Logistics &amp; Robotics</div>
+          <div class="card-title">Warehouse Robot Navigation</div>
+          <p class="card-desc">Reinforcement learning agent that teaches autonomous mobile robots optimal pathfinding without manual programming. Using Proximal Policy Optimization (PPO), the agent learns goal-directed navigation from scratch and generalises to layouts it has never seen.</p>
+          <div class="card-tags">
+            <span class="tag">Reinforcement Learning</span><span class="tag">PPO</span><span class="tag">OpenAI Gym</span><span class="tag">Stable Baselines 3</span>
+          </div>
+          <div class="card-footer"><span class="card-note"></span><span class="card-arrow">↗</span></div>
+        </a>
+
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- CONTACT -->
-<section id="contact">
-  <div class="section-header">
-    <span class="section-tag">03</span>
-    <h2 class="section-title">Get in Touch</h2>
-    <div class="section-line"></div>
-  </div>
+  <hr class="section-rule" />
 
-  <div class="contact-grid">
-    <div class="contact-text reveal">
-      Based in Europe, currently exploring new opportunities.
-    </div>
-
-    <div class="contact-links reveal">
-      <a href="https://www.linkedin.com/in/salari-kayvon/" target="_blank" class="contact-link">
-        <div>
-          <div class="contact-link-label">LinkedIn</div>
-          <div class="contact-link-value">linkedin.com/in/salari-kayvon</div>
+  <!-- ABOUT -->
+  <section id="about" class="about-section">
+    <div class="section-inner">
+      <p class="section-label"><span>02</span>Background</p>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>I've spent 25+ years designing and delivering large-scale data platforms and enterprise architecture across some of Europe's largest organisations — <strong>Sky Germany, Lufthansa, Bayer, HP, Deutsche Telekom, and Volkswagen</strong>, among others.</p>
+          <p>As <strong>Head of Data Architecture at Sky Germany</strong>, I built two international teams from scratch, migrated on-premise Cloudera infrastructure to GCP delivering over €1M in annual savings, and eliminated 100% dependency on external consultancies.</p>
+          <p>I co-founded <strong>Zeal Hub GmbH</strong>, a boutique data and BI consultancy, running enterprise data platform engagements independently for five years.</p>
+          <p>I'm now completing advanced <strong>Agentic AI Architecture training at Johns Hopkins University</strong> — applying that foundation to build multi-agent systems that solve real enterprise problems across finance, healthcare, and public sector.</p>
         </div>
-        <div class="contact-link-arrow">↗</div>
-      </a>
-      <a href="https://github.com/kayvonsalari" target="_blank" class="contact-link">
-        <div>
-          <div class="contact-link-label">GitHub</div>
-          <div class="contact-link-value">github.com/kayvonsalari</div>
+        <div class="certs">
+          <div class="cert">
+            <div class="cert-icon">◈</div>
+            <div>
+              <div class="cert-name">TOGAF 10 Certified</div>
+              <div class="cert-sub">Enterprise Architecture · Sep 2024</div>
+            </div>
+          </div>
+          <div class="cert">
+            <div class="cert-icon">◈</div>
+            <div>
+              <div class="cert-name">Google Cloud Certified</div>
+              <div class="cert-sub">GCP Professional Data Engineer</div>
+            </div>
+          </div>
+          <div class="cert">
+            <div class="cert-icon">◈</div>
+            <div>
+              <div class="cert-name">Microsoft Azure Certified</div>
+              <div class="cert-sub">Azure Data &amp; Cloud Architecture</div>
+            </div>
+          </div>
+          <div class="cert">
+            <div class="cert-icon">◈</div>
+            <div>
+              <div class="cert-name">SAFe for Architects</div>
+              <div class="cert-sub">Scaled Agile Framework</div>
+            </div>
+          </div>
+          <div class="cert">
+            <div class="cert-icon">◈</div>
+            <div>
+              <div class="cert-name">Agentic AI Architecture</div>
+              <div class="cert-sub">Johns Hopkins University · In progress</div>
+            </div>
+          </div>
         </div>
-        <div class="contact-link-arrow">↗</div>
-      </a>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <hr class="section-rule" />
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-inner">
+      <p class="section-label"><span>03</span>Get in Touch</p>
+      <h2>Based in Europe,<br>exploring new opportunities.</h2>
+      <div class="contact-grid">
+        <a class="contact-card" href="https://www.linkedin.com/in/salari-kayvon/" target="_blank" rel="noopener">
+          <div class="contact-platform">LinkedIn</div>
+          <div class="contact-handle">linkedin.com/in/salari-kayvon ↗</div>
+        </a>
+        <a class="contact-card" href="https://github.com/kayvonsalari" target="_blank" rel="noopener">
+          <div class="contact-platform">GitHub</div>
+          <div class="contact-handle">github.com/kayvonsalari ↗</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
 
 <footer>
-  <p>© 2026 Kayvon Salari</p>
-  <p>Built with intention · Hosted on GitHub Pages</p>
+  © 2026 Kayvon Salari · Built with intention · Hosted on GitHub Pages
 </footer>
-
-<script>
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 80);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  reveals.forEach(el => observer.observe(el));
-</script>
 
 </body>
 </html>
