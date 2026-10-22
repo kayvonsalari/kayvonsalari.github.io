@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mortgage paperwork to decision on Databricks | Kayvon Salari</title>
+  <meta name="description" content="An agent that reads loan documents, catches what does not add up, and leaves the decision to fixed rules and a person." />
+  <link rel="canonical" href="https://kayvonsalari.com/projects/databricks-underwriting-agent/" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%231d6fd0'/><text x='32' y='46' font-family='Georgia,serif' font-size='42' font-weight='700' text-anchor='middle' fill='white'>K</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../project.css" />
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="/">kayvonsalari.com</a>
+    <ul class="nav-links">
+      <li><a href="/#projects">Projects</a></li>
+      <li><a href="/#about">About</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <article class="p-wrap">
+    <a class="p-back" href="/#projects">← All projects</a>
+    <header class="p-head">
+      <p class="p-sector">Financial Services · Platform Engineering</p>
+      <h1>Mortgage paperwork to decision on Databricks</h1>
+      <p class="p-lead">An agent that reads loan documents, catches what does not add up, and leaves the decision to fixed rules and a person.</p>
+      
+    </header>
+
+    <div class="p-body">
+      <section class="p-section">
+        <h2><span>01</span>The problem</h2>
+        <p>Mortgage applications do not arrive as neat data. They arrive as an email, a payslip, a bank statement and a credit report. Someone has to read them all, copy the figures out, and notice when they disagree. It is slow work, and the mistakes that matter are easy to miss.</p>
+      </section>
+      <section class="p-section">
+        <h2><span>02</span>What it does</h2>
+        <p>The agent reads each document and pulls out the figures, noting which document every figure came from. It then looks for trouble: an income the payslip does not support, a car loan the applicant did not mention, or a number that rests only on the applicant’s own word.</p>
+      </section>
+      <section class="p-section">
+        <h2><span>03</span>How it works</h2>
+        <p>The AI reads; it does not decide. The approval itself is a fixed rule stored in the database and checked against a policy table, so the same file always gets the same answer and anyone can see why. Any application that is not a clean pass goes to a person, together with a case note the agent has already drafted. Every step is recorded, so you can trace how each figure was found.</p>
+      </section>
+      <section class="p-section">
+        <h2><span>04</span>What came out of it</h2>
+        <p>A working demo with eleven checks on what the agent extracts. The write up on GitHub is an honest field report, including where the platform and the model fell short. This is the pattern I suggest to most organisations starting with agents: give AI the reading, keep the decision in rules people can audit.</p>
+      </section>
+
+      <section class="p-built">
+        <h3>Built with</h3>
+        <div class="card-tags"><span class="tag">Databricks</span><span class="tag">Unity Catalog</span><span class="tag">MLflow tracing</span><span class="tag">Llama 4</span><span class="tag">Fixed decision rules</span><span class="tag">Human review</span></div>
+      </section>
+
+      <div class="p-cta">
+        <div>
+          <p class="p-cta-title">Want the technical detail?</p>
+          <p class="p-cta-sub">The code and the full technical write up are on GitHub.</p>
+        </div>
+        <a class="btn btn-primary" href="https://github.com/kayvonsalari/databricks-underwriting-agent" target="_blank" rel="noopener">View the code on GitHub ↗</a>
+      </div>
+    </div>
+
+    <nav class="p-pn" aria-label="More projects">
+      <a class="pn pn-prev" href="../aristos-council/"><span class="pn-label">← Previous</span><span class="pn-title">Aristos Council: stock research you can check</span></a><a class="pn pn-next" href="../duallens/"><span class="pn-label">Next →</span><span class="pn-title">DualLens: AI powered investment research</span></a>
+    </nav>
+  </article>
+</main>
+
+<footer>
+  © 2026 Kayvon Salari · Built with intention · Hosted on GitHub Pages
+</footer>
+
+</body>
+</html>

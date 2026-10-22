@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Warehouse Robot Navigation | Kayvon Salari</title>
+  <meta name="description" content="A robot that learns to find its way around a warehouse by itself, including layouts it has never seen." />
+  <link rel="canonical" href="https://kayvonsalari.com/projects/warehouse-robot-navigation/" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%231d6fd0'/><text x='32' y='46' font-family='Georgia,serif' font-size='42' font-weight='700' text-anchor='middle' fill='white'>K</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../project.css" />
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="/">kayvonsalari.com</a>
+    <ul class="nav-links">
+      <li><a href="/#projects">Projects</a></li>
+      <li><a href="/#about">About</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <article class="p-wrap">
+    <a class="p-back" href="/#projects">← All projects</a>
+    <header class="p-head">
+      <p class="p-sector">Logistics &amp; Robotics</p>
+      <h1>Warehouse Robot Navigation</h1>
+      <p class="p-lead">A robot that learns to find its way around a warehouse by itself, including layouts it has never seen.</p>
+      
+    </header>
+
+    <div class="p-body">
+      <section class="p-section">
+        <h2><span>01</span>The problem</h2>
+        <p>Warehouse robots usually follow routes someone has programmed by hand. Every time the shelves move or a new aisle opens, those routes have to be redone. The more often the layout changes, the more that upkeep costs.</p>
+      </section>
+      <section class="p-section">
+        <h2><span>02</span>What it does</h2>
+        <p>Instead of being given routes, this robot learns how to reach a goal. Once trained, it can be dropped into a warehouse layout it has never seen and still find its way.</p>
+      </section>
+      <section class="p-section">
+        <h2><span>03</span>How it works</h2>
+        <p>The robot learns by trial and error in a simulated warehouse. It is rewarded for reaching the goal and penalised for wasted moves or collisions, much like training a dog with treats. Over many thousands of attempts it works out a general way of moving towards a goal, rather than memorising one map. The training method used is called PPO, a common and stable way of teaching an agent through rewards.</p>
+      </section>
+      <section class="p-section">
+        <h2><span>04</span>What came out of it</h2>
+        <p>Route finding becomes a skill the robot has learned, not a rulebook someone must keep up to date. It is also the one project here that does not use a language model at all, which is a useful reminder that not every AI problem is a chatbot problem.</p>
+      </section>
+
+      <section class="p-built">
+        <h3>Built with</h3>
+        <div class="card-tags"><span class="tag">Reinforcement learning (PPO)</span><span class="tag">OpenAI Gym simulation</span><span class="tag">Stable Baselines 3</span></div>
+      </section>
+
+      <div class="p-cta">
+        <div>
+          <p class="p-cta-title">Want the technical detail?</p>
+          <p class="p-cta-sub">The code and the full technical write up are on GitHub.</p>
+        </div>
+        <a class="btn btn-primary" href="https://github.com/kayvonsalari/warehouse-robot-navigation" target="_blank" rel="noopener">View the code on GitHub ↗</a>
+      </div>
+    </div>
+
+    <nav class="p-pn" aria-label="More projects">
+      <a class="pn pn-prev" href="../mucatlas/"><span class="pn-label">← Previous</span><span class="pn-title">MucAtlas: a knowledge assistant for city staff</span></a><a class="pn pn-next" href="../tennis-oracle/"><span class="pn-label">Next →</span><span class="pn-title">Tennis Oracle: match predictions from ratings</span></a>
+    </nav>
+  </article>
+</main>
+
+<footer>
+  © 2026 Kayvon Salari · Built with intention · Hosted on GitHub Pages
+</footer>
+
+</body>
+</html>

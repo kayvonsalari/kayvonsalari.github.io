@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tennis Oracle: match predictions from ratings | Kayvon Salari</title>
+  <meta name="description" content="Predicts tennis results from a rating system built on a million matches, and tested AI against it head to head." />
+  <link rel="canonical" href="https://kayvonsalari.com/projects/tennis-oracle/" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%231d6fd0'/><text x='32' y='46' font-family='Georgia,serif' font-size='42' font-weight='700' text-anchor='middle' fill='white'>K</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../project.css" />
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="/">kayvonsalari.com</a>
+    <ul class="nav-links">
+      <li><a href="/#projects">Projects</a></li>
+      <li><a href="/#about">About</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <article class="p-wrap">
+    <a class="p-back" href="/#projects">← All projects</a>
+    <header class="p-head">
+      <p class="p-sector">Sports Analytics · Agent Protocol</p>
+      <h1>Tennis Oracle: match predictions from ratings</h1>
+      <p class="p-lead">Predicts tennis results from a rating system built on a million matches, and tested AI against it head to head.</p>
+      
+    </header>
+
+    <div class="p-body">
+      <section class="p-section">
+        <h2><span>01</span>The problem</h2>
+        <p>Betting markets price the big tournaments very well, because so many people watch them. Lower down the game, in the smaller tours where most professional matches are played, prices are thin or missing altogether. That is where a careful, consistent method has room to be useful.</p>
+      </section>
+      <section class="p-section">
+        <h2><span>02</span>What it does</h2>
+        <p>Tennis Oracle rates every men’s and women’s professional player, from the main tours down to the entry level events, using around a million past matches. It then predicts who wins a given match and explains why in plain language.</p>
+      </section>
+      <section class="p-section">
+        <h2><span>03</span>How it works</h2>
+        <p>The ratings work like chess ratings: beat a strong player and your rating rises a lot, beat a weak one and it rises a little. They are adjusted for surface, since a player can be strong on clay and ordinary on grass. The ratings make the prediction; AI only writes the explanation. The system can also talk to other AI agents through a shared standard (the A2A protocol), so it can be plugged into larger setups.</p>
+      </section>
+      <section class="p-section">
+        <h2><span>04</span>What came out of it</h2>
+        <p>At the top of the game it picks the winner 65% of the time, where the betting market manages 68%. In women’s entry level events, which no bookmaker prices, it reaches 70%. I also ran a blind test on 197 matches, pitting an AI analyst against the ratings. The AI lost by 7.6 percentage points, which is exactly why it only writes the explanation here.</p>
+      </section>
+
+      <section class="p-built">
+        <h3>Built with</h3>
+        <div class="card-tags"><span class="tag">Glicko 2 ratings</span><span class="tag">A2A protocol</span><span class="tag">Multiple data feeds</span><span class="tag">Streamlit</span><span class="tag">Walk forward backtesting</span></div>
+      </section>
+
+      <div class="p-cta">
+        <div>
+          <p class="p-cta-title">Want the technical detail?</p>
+          <p class="p-cta-sub">The code and the full technical write up are on GitHub.</p>
+        </div>
+        <a class="btn btn-primary" href="https://github.com/kayvonsalari/tennis-oracle" target="_blank" rel="noopener">View the code on GitHub ↗</a>
+      </div>
+    </div>
+
+    <nav class="p-pn" aria-label="More projects">
+      <a class="pn pn-prev" href="../warehouse-robot-navigation/"><span class="pn-label">← Previous</span><span class="pn-title">Warehouse Robot Navigation</span></a>
+    </nav>
+  </article>
+</main>
+
+<footer>
+  © 2026 Kayvon Salari · Built with intention · Hosted on GitHub Pages
+</footer>
+
+</body>
+</html>

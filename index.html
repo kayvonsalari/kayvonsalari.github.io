@@ -221,7 +221,7 @@
       transition: background 0.15s;
     }
     .card:hover { background: var(--accent-pale); }
-    .card:hover .card-arrow { transform: translate(3px, -3px); }
+    .card:hover .card-arrow { transform: translateX(4px); }
 
     .card-sector {
       font-size: 0.65rem;
@@ -422,124 +422,124 @@
       <p style="font-size: 0.975rem; font-weight: 300; color: var(--ink-mid); max-width: 52ch; line-height: 1.75; margin-bottom: 2.5rem;">Actively building — new systems and code shipping regularly.</p>
       <div class="projects-grid">
 
-        <a class="card" href="https://github.com/kayvonsalari/aristos-council" target="_blank" rel="noopener">
+        <a class="card" href="/projects/aristos-council/">
           <div class="card-sector">Investment Intelligence · Multi-Strategy</div>
           <div class="card-title">Aristos Council — Multi-Agent Equity Research</div>
           <p class="card-desc">Aristos Council — an equity research system built on one idea: AI you can audit. It now reads the market through eight lenses — five stock strategies plus three ETF views: dividend, growth, and an “ETF Index Tracker” that ranks broad-market index funds on fee, fund size, and momentum. Verdicts stay fully deterministic — math judges, the LLM writes — and an automated fact-checker annotates the narration against the numbers, flagging anything that doesn't match. Public repo, ~930 tests, CI, cloud-agent development pipeline.</p>
           <div class="card-tags">
             <span class="tag">LangGraph</span><span class="tag">Multi-Agent</span><span class="tag">yfinance</span><span class="tag">EODHD</span><span class="tag">Hybrid Data</span><span class="tag">Provenance Audit</span><span class="tag">Fact-Check Pass</span><span class="tag">LangSmith</span><span class="tag">GitHub Actions</span>
           </div>
-          <div class="card-footer"><span class="card-note"></span><span class="card-arrow">↗</span></div>
+          <div class="card-footer"><span class="card-note"></span><span class="card-arrow">→</span></div>
         </a>
 
-        <a class="card" href="https://github.com/kayvonsalari/databricks-underwriting-agent" target="_blank" rel="noopener">
+        <a class="card" href="/projects/databricks-underwriting-agent/">
           <div class="card-sector">Financial Services &middot; Platform Engineering</div>
           <div class="card-title">Governed Document-to-Decision Agent on Databricks</div>
           <p class="card-desc">Mortgage applications arrive as paperwork, not tidy records. This agent reads an applicant's email, payslip, bank statement and credit report, extracts every figure with the document it came from, and flags what does not add up — an income claim the payslip contradicts, an undeclared car loan, figures resting only on the applicant's word. The decision itself never touches the model: it runs as a Unity Catalog SQL function against a policy table, and anything short of a clean pass goes to a human with a drafted case note. Eleven extraction checks, traced end to end in MLflow. The README is an honest field report, including where the platform and the model fell short.</p>
           <div class="card-tags">
             <span class="tag">Databricks</span><span class="tag">Unity Catalog</span><span class="tag">MLflow Tracing</span><span class="tag">Llama 4</span><span class="tag">Deterministic Rules</span><span class="tag">HITL</span>
           </div>
-          <div class="card-footer"><span class="card-note"></span><span class="card-arrow">↗</span></div>
+          <div class="card-footer"><span class="card-note"></span><span class="card-arrow">→</span></div>
         </a>
 
-        <a class="card" href="https://github.com/kayvonsalari/duallens-analytics" target="_blank" rel="noopener">
+        <a class="card" href="/projects/duallens/">
           <div class="card-sector">Investment Research</div>
           <div class="card-title">AI-Powered Investment Research Platform</div>
           <p class="card-desc">Analysts burn hours cross-referencing market data against strategy documents. DualLens ranks companies on both at once — three years of stock performance joined with insights RAG-extracted from strategy PDFs — surfacing which names are financially strong <em>and</em> positioned for AI adoption. One query replaces the manual cross-referencing loop.</p>
           <div class="card-tags">
             <span class="tag">RAG</span><span class="tag">LangChain</span><span class="tag">ChromaDB</span><span class="tag">Yahoo Finance</span><span class="tag">OpenAI</span>
           </div>
-          <div class="card-footer"><span class="card-note"></span><span class="card-arrow">↗</span></div>
+          <div class="card-footer"><span class="card-note"></span><span class="card-arrow">→</span></div>
         </a>
 
-        <a class="card" href="https://github.com/kayvonsalari/financial-research-analyst" target="_blank" rel="noopener">
+        <a class="card" href="/projects/financial-research-analyst/">
           <div class="card-sector">Investment Intelligence</div>
           <div class="card-title">Autonomous Financial Research Analyst</div>
           <p class="card-desc">Per-company investment research takes an analyst 4–6 hours; this LangGraph agent does the gathering in minutes. It pulls real-time market data, news sentiment, and private analyst reports, then produces a Buy/Hold/Sell recommendation with every source cited — auditable enough to check, fast enough to run across a watchlist. The predecessor to Aristos Council, where its single-agent verdict grew into a gated, deterministic decision core.</p>
           <div class="card-tags">
             <span class="tag">LangGraph</span><span class="tag">LangChain</span><span class="tag">Tavily</span><span class="tag">RAG</span><span class="tag">OpenAI</span>
           </div>
-          <div class="card-footer"><span class="card-note"></span><span class="card-arrow">↗</span></div>
+          <div class="card-footer"><span class="card-note"></span><span class="card-arrow">→</span></div>
         </a>
 
-        <a class="card" href="https://github.com/kayvonsalari/mortgage-underwriting-agent" target="_blank" rel="noopener">
+        <a class="card" href="/projects/mortgage-underwriting/">
           <div class="card-sector">Financial Services</div>
           <div class="card-title">Senior Mortgage Underwriting System</div>
           <p class="card-desc">Mortgage underwriting takes 3–5 days largely because four assessments — credit, income, assets, collateral — queue behind one another. This system runs them as specialist agents under a Supervisor, cutting the cycle to hours while keeping the parts regulators care about: Fair-Lending compliance, PII protection, bias detection, and mandatory human-in-the-loop escalation on every contested file.</p>
           <div class="card-tags">
             <span class="tag">LangGraph</span><span class="tag">Multi-Agent</span><span class="tag">RAG</span><span class="tag">ChromaDB</span><span class="tag">HITL</span>
           </div>
-          <div class="card-footer"><span class="card-note"></span><span class="card-arrow">↗</span></div>
+          <div class="card-footer"><span class="card-note"></span><span class="card-arrow">→</span></div>
         </a>
 
-        <a class="card" href="https://github.com/kayvonsalari/ms-risk-screening-agent" target="_blank" rel="noopener">
+        <a class="card" href="/projects/ms-risk-screening/">
           <div class="card-sector">Clinical Decision Support</div>
           <div class="card-title">MS Risk Screening Agent</div>
           <p class="card-desc">Early multiple-sclerosis signals sit scattered across EHR records where no one has time to connect them. This multi-agent system scans records and flags patients showing early risk patterns for neurologist review — with adjustable autonomy, a transparent rationale for every flag, and PHI governance throughout. It surfaces candidates for clinical judgment; it does not replace it.</p>
           <div class="card-tags">
             <span class="tag">Multi-Agent</span><span class="tag">HAI</span><span class="tag">EHR Simulation</span><span class="tag">Responsible AI</span><span class="tag">LangChain</span>
           </div>
-          <div class="card-footer"><span class="card-note"></span><span class="card-arrow">↗</span></div>
+          <div class="card-footer"><span class="card-note"></span><span class="card-arrow">→</span></div>
         </a>
 
-        <a class="card" href="https://github.com/kayvonsalari/agi-research-intelligence" target="_blank" rel="noopener">
+        <a class="card" href="/projects/agi-research-intelligence/">
           <div class="card-sector">Research Intelligence</div>
           <div class="card-title">AGI Research Intelligence Platform</div>
           <p class="card-desc">Keeping up with AGI-relevant research on arXiv is a weeks-long manual effort with partial coverage. A Planner→Discovery→Evaluation agent pipeline automates it, scoring every paper against a standardized 10-parameter AGI framework — literature review in hours, with 3–5× the coverage of manual survey.</p>
           <div class="card-tags">
             <span class="tag">LangGraph</span><span class="tag">Multi-Agent</span><span class="tag">arXiv API</span><span class="tag">OpenAI</span>
           </div>
-          <div class="card-footer"><span class="card-note"></span><span class="card-arrow">↗</span></div>
+          <div class="card-footer"><span class="card-note"></span><span class="card-arrow">→</span></div>
         </a>
 
-        <a class="card" href="https://github.com/kayvonsalari/linkedin-post-generator" target="_blank" rel="noopener">
+        <a class="card" href="/projects/linkedin-post-generator/">
           <div class="card-sector">Content Intelligence</div>
           <div class="card-title">LinkedIn Post Generator</div>
           <p class="card-desc">A content pipeline with editorial standards built in: a Researcher gathers material, a Writer drafts, a Critic scores against a quality rubric, and a Supervisor loops them until the draft clears the bar. The interesting part is the loop — generation that doesn't ship until an adversarial agent approves it.</p>
           <div class="card-tags">
             <span class="tag">LangGraph</span><span class="tag">Multi-Agent</span><span class="tag">LangChain</span><span class="tag">OpenAI</span>
           </div>
-          <div class="card-footer"><span class="card-note"></span><span class="card-arrow">↗</span></div>
+          <div class="card-footer"><span class="card-note"></span><span class="card-arrow">→</span></div>
         </a>
 
-        <a class="card" href="https://github.com/kayvonsalari/healthcare-intelligence-assistant" target="_blank" rel="noopener">
+        <a class="card" href="/projects/healthcare-intelligence-assistant/">
           <div class="card-sector">Healthcare · Data Governance</div>
           <div class="card-title">Healthcare Intelligence Assistant</div>
           <p class="card-desc">Clinicians wait on DBAs for every data question. This Natural Language-to-SQL system lets them ask directly — and makes it safe by classifying every query before execution: READ runs automatically, WRITE requires human approval, UNSAFE is rejected outright. Full audit trails keep it inside HIPAA and GDPR.</p>
           <div class="card-tags">
             <span class="tag">LangGraph</span><span class="tag">NL-to-SQL</span><span class="tag">HITL</span><span class="tag">HIPAA</span><span class="tag">GDPR</span>
           </div>
-          <div class="card-footer"><span class="card-note"></span><span class="card-arrow">↗</span></div>
+          <div class="card-footer"><span class="card-note"></span><span class="card-arrow">→</span></div>
         </a>
 
-        <a class="card" href="https://github.com/kayvonsalari/mucatlas" target="_blank" rel="noopener">
+        <a class="card" href="/projects/mucatlas/">
           <div class="card-sector">Public Sector · Knowledge Management</div>
           <div class="card-title">MucAtlas — Municipal Knowledge Agent</div>
           <p class="card-desc">City caseworkers lose time hunting answers across fragmented internal sources of unknown currency. MucAtlas (Munich Innovation Challenge 2026 entry) is a five-agent RAG system that connects those sources, validates whether legal documents are still current, detects contradictions between sources, and returns cited answers in seconds — with full data sovereignty via confidential computing. Architecture and design; competition entry.</p>
           <div class="card-tags">
             <span class="tag">Multi-Agent</span><span class="tag">RAG</span><span class="tag">Confidential Computing</span><span class="tag">MCP</span><span class="tag">GDPR</span>
           </div>
-          <div class="card-footer"><span class="card-note">Architecture &amp; design — competition entry</span><span class="card-arrow">↗</span></div>
+          <div class="card-footer"><span class="card-note">Architecture &amp; design — competition entry</span><span class="card-arrow">→</span></div>
         </a>
 
-        <a class="card" href="https://github.com/kayvonsalari/warehouse-robot-navigation" target="_blank" rel="noopener">
+        <a class="card" href="/projects/warehouse-robot-navigation/">
           <div class="card-sector">Logistics &amp; Robotics</div>
           <div class="card-title">Warehouse Robot Navigation</div>
           <p class="card-desc">Programming warehouse robot routes by hand doesn't scale past the first layout change. This reinforcement-learning agent (PPO) learns goal-directed navigation from scratch and generalizes to layouts it has never seen — pathfinding as a learned skill rather than a maintained ruleset.</p>
           <div class="card-tags">
             <span class="tag">Reinforcement Learning</span><span class="tag">PPO</span><span class="tag">OpenAI Gym</span><span class="tag">Stable Baselines 3</span>
           </div>
-          <div class="card-footer"><span class="card-note"></span><span class="card-arrow">↗</span></div>
+          <div class="card-footer"><span class="card-note"></span><span class="card-arrow">→</span></div>
         </a>
 
-        <a class="card" href="https://github.com/kayvonsalari/tennis-oracle" target="_blank" rel="noopener">
+        <a class="card" href="/projects/tennis-oracle/">
           <div class="card-sector">Sports Analytics &middot; Agent Protocol</div>
           <div class="card-title">Tennis Oracle — Deterministic Match Prediction</div>
           <p class="card-desc">Betting markets price the top of the game efficiently and ignore the bottom entirely. Tennis Oracle rates every ATP and WTA player from a million matches — tour, Challenger and ITF — and predicts at 65% where the market sits at 68%, but at 70% on women's ITF events no bookmaker prices at all. Verdicts come from surface-adjusted Glicko-2; the LLM only narrates. Speaks the A2A agent protocol, and a blind test of 197 matches showed the model analyst losing to the ratings by 7.6 points, which is why it narrates.</p>
           <div class="card-tags">
             <span class="tag">A2A Protocol</span><span class="tag">Glicko-2</span><span class="tag">Multi-Source Feeds</span><span class="tag">Streamlit</span><span class="tag">Walk-Forward Backtest</span>
           </div>
-          <div class="card-footer"><span class="card-note"></span><span class="card-arrow">↗</span></div>
+          <div class="card-footer"><span class="card-note"></span><span class="card-arrow">→</span></div>
         </a>
 
       </div>
