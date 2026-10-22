@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Senior Mortgage Underwriting System | Kayvon Salari</title>
+  <meta name="description" content="Four specialist AI agents assess a mortgage at the same time, with a person stepping in on every contested case." />
+  <link rel="canonical" href="https://kayvonsalari.com/projects/mortgage-underwriting/" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%231d6fd0'/><text x='32' y='46' font-family='Georgia,serif' font-size='42' font-weight='700' text-anchor='middle' fill='white'>K</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../project.css" />
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="/">kayvonsalari.com</a>
+    <ul class="nav-links">
+      <li><a href="/#projects">Projects</a></li>
+      <li><a href="/#about">About</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <article class="p-wrap">
+    <a class="p-back" href="/#projects">← All projects</a>
+    <header class="p-head">
+      <p class="p-sector">Financial Services</p>
+      <h1>Senior Mortgage Underwriting System</h1>
+      <p class="p-lead">Four specialist AI agents assess a mortgage at the same time, with a person stepping in on every contested case.</p>
+      
+    </header>
+
+    <div class="p-body">
+      <section class="p-section">
+        <h2><span>01</span>The problem</h2>
+        <p>Underwriting a mortgage often takes three to five days. A big reason is that four separate checks (credit, income, savings and the property itself) wait in line behind each other. The work also carries real rules about fair lending and personal data that cannot be skipped to save time.</p>
+      </section>
+      <section class="p-section">
+        <h2><span>02</span>What it does</h2>
+        <p>The system gives each of the four checks to its own specialist agent. A supervising agent hands out the work and gathers the results. A critic agent then reviews the combined picture before a final recommendation: approve, approve with conditions, or decline.</p>
+      </section>
+      <section class="p-section">
+        <h2><span>03</span>How it works</h2>
+        <p>Personal details are removed before any AI sees the file. A bias check looks for signs that a decision leans on something it should not. The agents look up the lender’s written policy rather than relying on memory. Any contested file is sent to a human underwriter, every time.</p>
+      </section>
+      <section class="p-section">
+        <h2><span>04</span>What came out of it</h2>
+        <p>On three test applications the system reached the expected outcome each time: one approval, one conditional approval and one decline. Running the checks side by side points to a cycle of hours rather than days. Building it also showed me the limit of letting AI make the decision, which is why my later Databricks version keeps the decision in fixed rules.</p>
+      </section>
+
+      <section class="p-built">
+        <h3>Built with</h3>
+        <div class="card-tags"><span class="tag">LangGraph</span><span class="tag">Multiple agents</span><span class="tag">ChromaDB</span><span class="tag">Retrieval from policy documents (RAG)</span><span class="tag">Human review</span></div>
+      </section>
+
+      <div class="p-cta">
+        <div>
+          <p class="p-cta-title">Want the technical detail?</p>
+          <p class="p-cta-sub">The code and the full technical write up are on GitHub.</p>
+        </div>
+        <a class="btn btn-primary" href="https://github.com/kayvonsalari/mortgage-underwriting-agent" target="_blank" rel="noopener">View the code on GitHub ↗</a>
+      </div>
+    </div>
+
+    <nav class="p-pn" aria-label="More projects">
+      <a class="pn pn-prev" href="../financial-research-analyst/"><span class="pn-label">← Previous</span><span class="pn-title">Autonomous Financial Research Analyst</span></a><a class="pn pn-next" href="../ms-risk-screening/"><span class="pn-label">Next →</span><span class="pn-title">MS Risk Screening Agent</span></a>
+    </nav>
+  </article>
+</main>
+
+<footer>
+  © 2026 Kayvon Salari · Built with intention · Hosted on GitHub Pages
+</footer>
+
+</body>
+</html>

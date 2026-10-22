@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Healthcare Intelligence Assistant | Kayvon Salari</title>
+  <meta name="description" content="Lets clinicians ask questions of their data in plain English, safely." />
+  <link rel="canonical" href="https://kayvonsalari.com/projects/healthcare-intelligence-assistant/" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%231d6fd0'/><text x='32' y='46' font-family='Georgia,serif' font-size='42' font-weight='700' text-anchor='middle' fill='white'>K</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../project.css" />
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="/">kayvonsalari.com</a>
+    <ul class="nav-links">
+      <li><a href="/#projects">Projects</a></li>
+      <li><a href="/#about">About</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <article class="p-wrap">
+    <a class="p-back" href="/#projects">← All projects</a>
+    <header class="p-head">
+      <p class="p-sector">Healthcare · Data Governance</p>
+      <h1>Healthcare Intelligence Assistant</h1>
+      <p class="p-lead">Lets clinicians ask questions of their data in plain English, safely.</p>
+      
+    </header>
+
+    <div class="p-body">
+      <section class="p-section">
+        <h2><span>01</span>The problem</h2>
+        <p>When a doctor wants to know something from hospital data, such as how many patients on a certain drug were readmitted, they usually have to ask a database specialist and wait. Letting AI write database queries directly would be faster, but one wrong query could change or delete patient records.</p>
+      </section>
+      <section class="p-section">
+        <h2><span>02</span>What it does</h2>
+        <p>Clinicians type their question in everyday language. The system turns it into a database query (this is called Natural Language to SQL) and returns the answer. Before anything runs, it sorts the query into one of three groups:</p><ul><li><strong>Read:</strong> it only looks at data, so it runs straight away.</li><li><strong>Write:</strong> it would change data, so a person must approve it first.</li><li><strong>Unsafe:</strong> it could cause harm, so it is refused.</li></ul>
+      </section>
+      <section class="p-section">
+        <h2><span>03</span>How it works</h2>
+        <p>The sorting step sits in front of the database like a gatekeeper. Every question, query and decision is logged, so there is a full record of who asked what and what happened. That record is what keeps the system within health data rules such as HIPAA in the US and GDPR in Europe.</p>
+      </section>
+      <section class="p-section">
+        <h2><span>04</span>What came out of it</h2>
+        <p>Clinicians get answers in seconds without waiting for a specialist, and the database stays protected. The same gatekeeper idea applies to any company that wants staff to query their own data without risk.</p>
+      </section>
+
+      <section class="p-built">
+        <h3>Built with</h3>
+        <div class="card-tags"><span class="tag">LangGraph</span><span class="tag">Natural Language to SQL</span><span class="tag">Human approval step</span><span class="tag">Audit logging</span><span class="tag">HIPAA and GDPR controls</span></div>
+      </section>
+
+      <div class="p-cta">
+        <div>
+          <p class="p-cta-title">Want the technical detail?</p>
+          <p class="p-cta-sub">The code and the full technical write up are on GitHub.</p>
+        </div>
+        <a class="btn btn-primary" href="https://github.com/kayvonsalari/healthcare-intelligence-assistant" target="_blank" rel="noopener">View the code on GitHub ↗</a>
+      </div>
+    </div>
+
+    <nav class="p-pn" aria-label="More projects">
+      <a class="pn pn-prev" href="../linkedin-post-generator/"><span class="pn-label">← Previous</span><span class="pn-title">LinkedIn Post Generator</span></a><a class="pn pn-next" href="../mucatlas/"><span class="pn-label">Next →</span><span class="pn-title">MucAtlas: a knowledge assistant for city staff</span></a>
+    </nav>
+  </article>
+</main>
+
+<footer>
+  © 2026 Kayvon Salari · Built with intention · Hosted on GitHub Pages
+</footer>
+
+</body>
+</html>

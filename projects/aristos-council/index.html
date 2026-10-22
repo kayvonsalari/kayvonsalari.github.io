@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aristos Council: stock research you can check | Kayvon Salari</title>
+  <meta name="description" content="An equity research tool where fixed rules make every buy, hold or sell call, and AI only writes the explanation." />
+  <link rel="canonical" href="https://kayvonsalari.com/projects/aristos-council/" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%231d6fd0'/><text x='32' y='46' font-family='Georgia,serif' font-size='42' font-weight='700' text-anchor='middle' fill='white'>K</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../project.css" />
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="/">kayvonsalari.com</a>
+    <ul class="nav-links">
+      <li><a href="/#projects">Projects</a></li>
+      <li><a href="/#about">About</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <article class="p-wrap">
+    <a class="p-back" href="/#projects">← All projects</a>
+    <header class="p-head">
+      <p class="p-sector">Investment Intelligence</p>
+      <h1>Aristos Council: stock research you can check</h1>
+      <p class="p-lead">An equity research tool where fixed rules make every buy, hold or sell call, and AI only writes the explanation.</p>
+      
+    </header>
+
+    <div class="p-body">
+      <section class="p-section">
+        <h2><span>01</span>The problem</h2>
+        <p>AI tools happily give opinions on stocks. The trouble is you cannot tell where the opinion came from. Ask the same question twice and you may get two different answers, and a confident sentence can rest on a number the model got wrong. For anyone who has to defend a decision, that is not good enough.</p>
+      </section>
+      <section class="p-section">
+        <h2><span>02</span>What it does</h2>
+        <p>Aristos compares a company with similar companies in its industry and runs it through a set of tests. Each test asks one plain question, such as “is this company cheap and good?”, “is it growing fast at a fair price?” or “are the profits real?”. Each test gives a verdict, and the final view is a simple majority of those verdicts. The report then explains the result in plain language.</p>
+      </section>
+      <section class="p-section">
+        <h2><span>03</span>How it works</h2>
+        <p>The verdicts come from maths that gives the same answer every time. AI is only allowed to write. A separate checker reads every sentence the AI wrote and compares it with the numbers, and flags anything that does not match. Each test has also been run against ten years of history in each industry, and the report shows its track record honestly, including when a test showed no real advantage.</p><p>This design came from an experiment. I first let groups of AI agents make the calls themselves, ran it across 17 such groups, and found their judgement was not reliable enough. So the AI was moved from judge to writer. That rule, “the maths judges, the AI writes”, runs through the whole system.</p>
+      </section>
+      <section class="p-section">
+        <h2><span>04</span>What came out of it</h2>
+        <p>A working tool with about 930 automated tests guarding its behaviour, used on real company and fund analysis. It is also my clearest example of the approach I recommend to clients: use AI where it is strong, and keep decisions where you can check them.</p>
+      </section>
+
+      <section class="p-built">
+        <h3>Built with</h3>
+        <div class="card-tags"><span class="tag">LangGraph</span><span class="tag">Multiple agents</span><span class="tag">yfinance</span><span class="tag">EODHD market data</span><span class="tag">LangSmith tracing</span><span class="tag">GitHub Actions</span></div>
+      </section>
+
+      <div class="p-cta">
+        <div>
+          <p class="p-cta-title">Want the technical detail?</p>
+          <p class="p-cta-sub">The code and the full technical write up are on GitHub.</p>
+        </div>
+        <a class="btn btn-primary" href="https://github.com/kayvonsalari/aristos-council" target="_blank" rel="noopener">View the code on GitHub ↗</a>
+      </div>
+    </div>
+
+    <nav class="p-pn" aria-label="More projects">
+      <span></span><a class="pn pn-next" href="../databricks-underwriting-agent/"><span class="pn-label">Next →</span><span class="pn-title">Mortgage paperwork to decision on Databricks</span></a>
+    </nav>
+  </article>
+</main>
+
+<footer>
+  © 2026 Kayvon Salari · Built with intention · Hosted on GitHub Pages
+</footer>
+
+</body>
+</html>

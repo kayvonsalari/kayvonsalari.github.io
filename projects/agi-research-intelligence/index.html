@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AGI Research Intelligence Platform | Kayvon Salari</title>
+  <meta name="description" content="A team of AI agents that finds new research papers on general AI and scores how much each one matters." />
+  <link rel="canonical" href="https://kayvonsalari.com/projects/agi-research-intelligence/" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%231d6fd0'/><text x='32' y='46' font-family='Georgia,serif' font-size='42' font-weight='700' text-anchor='middle' fill='white'>K</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../project.css" />
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="/">kayvonsalari.com</a>
+    <ul class="nav-links">
+      <li><a href="/#projects">Projects</a></li>
+      <li><a href="/#about">About</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <article class="p-wrap">
+    <a class="p-back" href="/#projects">← All projects</a>
+    <header class="p-head">
+      <p class="p-sector">Research Intelligence</p>
+      <h1>AGI Research Intelligence Platform</h1>
+      <p class="p-lead">A team of AI agents that finds new research papers on general AI and scores how much each one matters.</p>
+      
+    </header>
+
+    <div class="p-body">
+      <section class="p-section">
+        <h2><span>01</span>The problem</h2>
+        <p>Hundreds of AI papers are published every week. Finding the few that move the field towards general intelligence, meaning AI that can handle new problems it was not trained for, takes weeks of reading, and even then you only cover part of what is out there.</p>
+      </section>
+      <section class="p-section">
+        <h2><span>02</span>What it does</h2>
+        <p>You give it a research question. The system plans a search, finds the relevant papers on arXiv (the main public archive for AI research), removes duplicates, and scores each paper. It ends with a ranked report of what is worth reading.</p>
+      </section>
+      <section class="p-section">
+        <h2><span>03</span>How it works</h2>
+        <p>Each job has its own agent. A planner decides what to search for, a discovery agent finds and cleans up the papers, and an evaluation agent scores them. A supervisor keeps them in order. Every paper is judged against the same ten questions, such as “does this help AI solve problems it has never seen?” or “can it learn from only a few examples?”, so the scores can be compared fairly.</p>
+      </section>
+      <section class="p-section">
+        <h2><span>04</span>What came out of it</h2>
+        <p>A literature review in hours instead of weeks, covering several times as many papers as a manual search would.</p>
+      </section>
+
+      <section class="p-built">
+        <h3>Built with</h3>
+        <div class="card-tags"><span class="tag">LangGraph</span><span class="tag">Multiple agents</span><span class="tag">arXiv API</span><span class="tag">OpenAI</span></div>
+      </section>
+
+      <div class="p-cta">
+        <div>
+          <p class="p-cta-title">Want the technical detail?</p>
+          <p class="p-cta-sub">The code and the full technical write up are on GitHub.</p>
+        </div>
+        <a class="btn btn-primary" href="https://github.com/kayvonsalari/agi-research-intelligence" target="_blank" rel="noopener">View the code on GitHub ↗</a>
+      </div>
+    </div>
+
+    <nav class="p-pn" aria-label="More projects">
+      <a class="pn pn-prev" href="../ms-risk-screening/"><span class="pn-label">← Previous</span><span class="pn-title">MS Risk Screening Agent</span></a><a class="pn pn-next" href="../linkedin-post-generator/"><span class="pn-label">Next →</span><span class="pn-title">LinkedIn Post Generator</span></a>
+    </nav>
+  </article>
+</main>
+
+<footer>
+  © 2026 Kayvon Salari · Built with intention · Hosted on GitHub Pages
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MucAtlas: a knowledge assistant for city staff | Kayvon Salari</title>
+  <meta name="description" content="A design for helping Munich’s caseworkers find reliable answers fast, while keeping citizens’ data under the city’s control. Entry to the Munich Innovation Challenge 2026." />
+  <link rel="canonical" href="https://kayvonsalari.com/projects/mucatlas/" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%231d6fd0'/><text x='32' y='46' font-family='Georgia,serif' font-size='42' font-weight='700' text-anchor='middle' fill='white'>K</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../project.css" />
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="/">kayvonsalari.com</a>
+    <ul class="nav-links">
+      <li><a href="/#projects">Projects</a></li>
+      <li><a href="/#about">About</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <article class="p-wrap">
+    <a class="p-back" href="/#projects">← All projects</a>
+    <header class="p-head">
+      <p class="p-sector">Public Sector · Knowledge Management</p>
+      <h1>MucAtlas: a knowledge assistant for city staff</h1>
+      <p class="p-lead">A design for helping Munich’s caseworkers find reliable answers fast, while keeping citizens’ data under the city’s control. Entry to the Munich Innovation Challenge 2026.</p>
+      <p class="p-note">Architecture and design, competition entry</p>
+    </header>
+
+    <div class="p-body">
+      <section class="p-section">
+        <h2><span>01</span>The problem</h2>
+        <p>City caseworkers spend a lot of time hunting for answers. The information is spread across many internal sources, and it is often unclear which version is current. A rule that changed last month may still sit in an old document, and two sources can quietly contradict each other.</p>
+      </section>
+      <section class="p-section">
+        <h2><span>02</span>What it does</h2>
+        <p>MucAtlas connects those sources and answers a caseworker’s question in seconds, with a reference for every point. Before it answers, it checks whether the legal documents it relies on are still in force, and it warns when two sources disagree.</p>
+      </section>
+      <section class="p-section">
+        <h2><span>03</span>How it works</h2>
+        <p>Five agents each do one job: one searches the sources, one checks that documents are still valid, one looks for contradictions, one writes the answer, and one assesses the risk of getting it wrong. Everything runs in a protected computing environment where even the hosting provider cannot see the data. For a public authority, that matters as much as the answers themselves.</p>
+      </section>
+      <section class="p-section">
+        <h2><span>04</span>Where it stands</h2>
+        <p>This is an architecture and design, submitted as a competition entry. It has not been built as a working system. The diagram below shows how the parts fit together.</p>
+      </section>
+      <figure class="p-figure">
+        <a href="architecture.svg" target="_blank" rel="noopener" title="Open full size"><img src="architecture.svg" alt="MucAtlas architecture: four layers, with the five agents working in sequence, all inside a protected computing environment." loading="lazy" /></a>
+        <figcaption>MucAtlas architecture: four layers, with the five agents working in sequence, all inside a protected computing environment. Click the diagram to open it full size.</figcaption>
+      </figure>
+      <section class="p-built">
+        <h3>Built with</h3>
+        <div class="card-tags"><span class="tag">Multiple agents</span><span class="tag">Retrieval from documents (RAG)</span><span class="tag">Confidential computing</span><span class="tag">Open models</span><span class="tag">MCP for connecting to city systems</span><span class="tag">GDPR controls</span></div>
+      </section>
+
+      <div class="p-cta">
+        <div>
+          <p class="p-cta-title">Want the technical detail?</p>
+          <p class="p-cta-sub">The code and the full technical write up are on GitHub.</p>
+        </div>
+        <a class="btn btn-primary" href="https://github.com/kayvonsalari/mucatlas" target="_blank" rel="noopener">View the code on GitHub ↗</a>
+      </div>
+    </div>
+
+    <nav class="p-pn" aria-label="More projects">
+      <a class="pn pn-prev" href="../healthcare-intelligence-assistant/"><span class="pn-label">← Previous</span><span class="pn-title">Healthcare Intelligence Assistant</span></a><a class="pn pn-next" href="../warehouse-robot-navigation/"><span class="pn-label">Next →</span><span class="pn-title">Warehouse Robot Navigation</span></a>
+    </nav>
+  </article>
+</main>
+
+<footer>
+  © 2026 Kayvon Salari · Built with intention · Hosted on GitHub Pages
+</footer>
+
+</body>
+</html>
