@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mortgage paperwork to decision on Databricks | Kayvon Salari</title>
-  <meta name="description" content="An agent that reads loan documents, catches what does not add up, and leaves the decision to fixed rules and a person." />
+  <meta name="description" content="An agent that reads loan documents and pulls out the figures, while fixed rules make the decision. Then I attacked it to see where it breaks." />
   <link rel="canonical" href="https://kayvonsalari.com/projects/databricks-underwriting-agent/" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%231d6fd0'/><text x='32' y='46' font-family='Georgia,serif' font-size='42' font-weight='700' text-anchor='middle' fill='white'>K</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -31,31 +31,35 @@
     <header class="p-head">
       <p class="p-sector">Financial Services · Platform Engineering</p>
       <h1>Mortgage paperwork to decision on Databricks</h1>
-      <p class="p-lead">An agent that reads loan documents, catches what does not add up, and leaves the decision to fixed rules and a person.</p>
+      <p class="p-lead">An agent that reads loan documents and pulls out the figures, while fixed rules make the decision. Then I attacked it to see where it breaks.</p>
       
     </header>
 
     <div class="p-body">
       <section class="p-section">
         <h2><span>01</span>The problem</h2>
-        <p>Mortgage applications do not arrive as neat data. They arrive as an email, a payslip, a bank statement and a credit report. Someone has to read them all, copy the figures out, and notice when they disagree. It is slow work, and the mistakes that matter are easy to miss.</p>
+        <p>Mortgage applications do not arrive as neat data. They arrive as an email, a payslip, a bank statement and a credit report. Someone has to read them all, copy the figures out, and notice when they disagree. The reading is slow. The lending rules are not.</p>
       </section>
       <section class="p-section">
         <h2><span>02</span>What it does</h2>
-        <p>The agent reads each document and pulls out the figures, noting which document every figure came from. It then looks for trouble: an income the payslip does not support, a car loan the applicant did not mention, or a number that rests only on the applicant’s own word.</p>
+        <p>The AI reads the documents and pulls out six figures: income, monthly debts, the new mortgage payment, the loan, the property value and the credit score. Each figure is recorded with the document it came from. It also flags trouble: a salary claimed in the email that the payslip does not support, a car loan the applicant did not declare, or a figure that rests only on the applicant’s own word.</p>
       </section>
       <section class="p-section">
         <h2><span>03</span>How it works</h2>
-        <p>The AI reads; it does not decide. The approval itself is a fixed rule stored in the database and checked against a policy table, so the same file always gets the same answer and anyone can see why. Any application that is not a clean pass goes to a person, together with a case note the agent has already drafted. Every step is recorded, so you can trace how each figure was found.</p>
+        <p>The AI reads; it never decides and never does arithmetic. Ordinary code does the sums and saves the figures. A fixed rule in the database then compares them with limits held in a policy table and returns approve, refer to a person, or decline. The AI cannot change the rule or the limits. Only after the decision is made does the AI write it up: an approval record that code checks figure by figure, or a case note for a human underwriter explaining what failed and what evidence would settle it.</p><p>Everything sits in one governed place on Databricks, with one set of permissions and a record of every step. The reading step is also served as a live endpoint, so other systems and testing tools can call it without anyone running a notebook.</p>
       </section>
       <section class="p-section">
-        <h2><span>04</span>What came out of it</h2>
-        <p>A working demo with eleven checks on what the agent extracts. The write up on GitHub is an honest field report, including where the platform and the model fell short. This is the pattern I suggest to most organisations starting with agents: give AI the reading, keep the decision in rules people can audit.</p>
+        <h2><span>04</span>Testing it like an attacker</h2>
+        <p>I attacked the finished system four ways. A pushy broker insisting on a better credit score, a reference number carrying a database command, and a forged compliance letter claiming the limits had been raised all failed. They aimed at parts of the system the AI cannot touch.</p><p>The fourth attack worked on the first attempt: a few lines of text hidden at the bottom of a genuine payslip, addressed to “automated processing systems”. The AI recorded the income as 12,000 euros instead of 7,200, and switched off the warnings that would have exposed it. Every other part of the system then did its job perfectly on a false figure. The lesson: the parts built from exact rules defend themselves; the AI reading documents does not, and a better prompt will not fix it. The write up sets out the code checks that would.</p>
+      </section>
+      <section class="p-section">
+        <h2><span>05</span>What came out of it</h2>
+        <p>An honest field report rather than a polished demo. It shows where the design holds, where the AI slipped (it also invented warnings on a perfectly clean file), and what a real deployment would need. It is a small test with fictional applicants, not a production system. The pattern is the one I suggest to most organisations starting with agents: give AI the reading, keep the decision in rules people can audit, and test it the way an attacker would.</p>
       </section>
 
       <section class="p-built">
         <h3>Built with</h3>
-        <div class="card-tags"><span class="tag">Databricks</span><span class="tag">Unity Catalog</span><span class="tag">MLflow tracing</span><span class="tag">Llama 4</span><span class="tag">Fixed decision rules</span><span class="tag">Human review</span></div>
+        <div class="card-tags"><span class="tag">Databricks</span><span class="tag">Unity Catalog</span><span class="tag">MLflow tracing</span><span class="tag">Model Serving endpoint</span><span class="tag">Llama 4 Maverick</span><span class="tag">Attack testing</span><span class="tag">Fixed decision rules</span></div>
       </section>
 
       <div class="p-cta">

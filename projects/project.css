@@ -1,26 +1,27 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* Same colours and fonts as the main page (index.html) */
+/* Project pages: a dark scheme of their own, same fonts and blue family as the main page */
 :root {
-  --ink:          #16191c;
-  --ink-mid:      #444b52;
-  --ink-light:    #828a93;
-  --paper:        #eceef1;
-  --paper-warm:   #dfe3e8;
-  --accent:       #1d6fd0;
-  --accent-pale:  #e8f0fb;
-  --rule:         #cdd3da;
-  --tag-bg:       #e4e8ec;
-  --tag-text:     #444b52;
-  --card-bg:      #ffffff;
+  --ink:          #eef2f6;
+  --ink-mid:      #b7c1cc;
+  --ink-light:    #7f8b98;
+  --paper:        #0f151c;
+  --paper-warm:   #141c25;
+  --accent:       #5ea2ef;
+  --accent-pale:  #16263a;
+  --rule:         #26313d;
+  --tag-bg:       #1e2a37;
+  --tag-text:     #c3ccd6;
+  --card-bg:      #161e27;
   --serif: 'DM Serif Display', Georgia, serif;
   --sans: 'DM Sans', system-ui, sans-serif;
   --max: 1100px;
   --read: 720px;
   --gap: clamp(1.25rem, 4vw, 2.5rem);
-  --shadow: 0 1px 3px rgba(20,30,45,0.06), 0 6px 16px rgba(20,30,45,0.06);
+  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.25);
 }
 
+html { color-scheme: dark; }
 body {
   font-family: var(--sans);
   background: var(--paper);
@@ -33,7 +34,7 @@ body {
 /* NAV (copied from main page) */
 body > nav {
   position: sticky; top: 0; z-index: 100;
-  background: rgba(247,245,240,0.94);
+  background: rgba(15,21,28,0.88);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--rule);
 }
@@ -159,6 +160,7 @@ h1 {
   padding-top: 2rem;
   border-top: 1px solid var(--rule);
 }
+.p-figure a { display: block; background: #ffffff; border-radius: 4px; padding: 0.75rem; }
 .p-figure img { display: block; width: 100%; height: auto; }
 .p-figure figcaption {
   margin-top: 0.8rem;
@@ -214,8 +216,8 @@ h1 {
   letter-spacing: 0.01em;
   transition: all 0.15s;
 }
-.btn-primary { background: var(--accent); color: #fff; }
-.btn-primary:hover { background: #1857a8; }
+.btn-primary { background: #1d6fd0; color: #fff; }
+.btn-primary:hover { background: #2a82e8; }
 
 /* PREVIOUS / NEXT */
 .p-pn {

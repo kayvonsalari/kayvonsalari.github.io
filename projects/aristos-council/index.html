@@ -42,20 +42,20 @@
       </section>
       <section class="p-section">
         <h2><span>02</span>What it does</h2>
-        <p>Aristos compares a company with similar companies in its industry and runs it through a set of tests. Each test asks one plain question, such as “is this company cheap and good?”, “is it growing fast at a fair price?” or “are the profits real?”. Each test gives a verdict, and the final view is a simple majority of those verdicts. The report then explains the result in plain language.</p>
+        <p>You pick a company, or a list of companies. Aristos finds the right comparison group from its own table of about 25,000 listed companies, matched by industry and size, and runs the company through a set of stock strategies. Each strategy asks one plain question, such as “is this company cheap and good?”, “is it growing fast at a fair price?”, “does it pay a steady income?” or “is it a durable business?”. A separate check asks “are the profits real?” and marks any doubts.</p><p>Each strategy gives a verdict, and the final view is a simple majority. The report opens with a short answer and a plain story of why, with the detailed workings folded underneath for anyone who wants them.</p>
       </section>
       <section class="p-section">
         <h2><span>03</span>How it works</h2>
-        <p>The verdicts come from maths that gives the same answer every time. AI is only allowed to write. A separate checker reads every sentence the AI wrote and compares it with the numbers, and flags anything that does not match. Each test has also been run against ten years of history in each industry, and the report shows its track record honestly, including when a test showed no real advantage.</p><p>This design came from an experiment. I first let groups of AI agents make the calls themselves, ran it across 17 such groups, and found their judgement was not reliable enough. So the AI was moved from judge to writer. That rule, “the maths judges, the AI writes”, runs through the whole system.</p>
+        <p>The verdicts come from maths that gives the same answer every time, and any past result can be replayed later to the exact same answer. AI is only allowed to write. A separate checker reads every sentence the AI wrote, compares it with the numbers, and flags anything that does not match. When data is missing or looks wrong, Aristos says so and leaves the company out rather than guessing.</p><p>Each strategy has been tested against ten years of history in each industry, and the report shows that track record honestly, including when a strategy showed no real advantage. For a second opinion, a panel of three AI models from different companies can review a company blind. Their views are shown but get no vote until they have built a year of results.</p><p>This design came from an experiment. I first let groups of AI agents make the calls themselves, ran it across 17 such groups, and found their judgement was not reliable enough. So the AI was moved from judge to writer. That rule, “the maths judges, the AI writes”, runs through the whole system.</p>
       </section>
       <section class="p-section">
         <h2><span>04</span>What came out of it</h2>
-        <p>A working tool with about 930 automated tests guarding its behaviour, used on real company and fund analysis. It is also my clearest example of the approach I recommend to clients: use AI where it is strong, and keep decisions where you can check them.</p>
+        <p>A working tool guarded by more than 5,000 automated tests, used on real company and fund analysis and now being prepared for a small group of outside testers. It is also my clearest example of the approach I recommend to clients: use AI where it is strong, and keep decisions where you can check them.</p>
       </section>
 
       <section class="p-built">
         <h3>Built with</h3>
-        <div class="card-tags"><span class="tag">LangGraph</span><span class="tag">Multiple agents</span><span class="tag">yfinance</span><span class="tag">EODHD market data</span><span class="tag">LangSmith tracing</span><span class="tag">GitHub Actions</span></div>
+        <div class="card-tags"><span class="tag">LangGraph</span><span class="tag">Multiple agents</span><span class="tag">yfinance</span><span class="tag">EODHD market data</span><span class="tag">Ten year backtests</span><span class="tag">Three model judge panel</span><span class="tag">LangSmith tracing</span><span class="tag">GitHub Actions</span></div>
       </section>
 
       <div class="p-cta">
