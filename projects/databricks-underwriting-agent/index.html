@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mortgage paperwork to decision on Databricks | Kayvon Salari</title>
-  <meta name="description" content="An agent that reads loan documents and pulls out the figures, while fixed rules make the decision. Then I attacked it to see where it breaks." />
+  <meta name="description" content="A project that reads loan papers, pulls out the numbers, and uses fixed rules to make the decision. Then I tested it to see where it breaks." />
   <link rel="canonical" href="https://kayvonsalari.com/projects/databricks-underwriting-agent/" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%231d6fd0'/><text x='32' y='46' font-family='Georgia,serif' font-size='42' font-weight='700' text-anchor='middle' fill='white'>K</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -31,18 +31,18 @@
     <header class="p-head">
       <p class="p-sector">Financial Services · Platform Engineering</p>
       <h1>Mortgage paperwork to decision on Databricks</h1>
-      <p class="p-lead">An agent that reads loan documents and pulls out the figures, while fixed rules make the decision. Then I attacked it to see where it breaks.</p>
+      <p class="p-lead">A project that reads loan papers and pulls out the numbers, while fixed rules make the decision. Then I tested it to see where it breaks.</p>
       
     </header>
 
     <div class="p-body">
       <section class="p-section">
         <h2><span>01</span>The problem</h2>
-        <p>Mortgage applications do not arrive as neat data. They arrive as an email, a payslip, a bank statement and a credit report. Someone has to read them all, copy the figures out, and notice when they disagree. The reading is slow. The lending rules are not.</p>
+        <p>Mortgage applications do not arrive as neat data. They arrive as an email, a payslip, a bank statement and a credit report. Someone has to read them all, copy the numbers out, and notice when they do not match. The reading is slow. The lending rules are not.</p>
       </section>
       <section class="p-section">
         <h2><span>02</span>What it does</h2>
-        <p>The AI reads the documents and pulls out six figures: income, monthly debts, the new mortgage payment, the loan, the property value and the credit score. Each figure is recorded with the document it came from. It also flags trouble: a salary claimed in the email that the payslip does not support, a car loan the applicant did not declare, or a figure that rests only on the applicant’s own word.</p>
+        <p>The AI reads the documents and pulls out six figures: income, monthly debts, the new mortgage payment, the loan, the property value and the credit score. Each figure is saved with the document it came from. It also flags trouble: a salary claimed in the email that the payslip does not support, a car loan the applicant did not declare, or a figure that rests only on the applicant’s own word.</p>
       </section>
       <section class="p-section">
         <h2><span>03</span>How it works</h2>
@@ -50,7 +50,7 @@
       </section>
       <section class="p-section">
         <h2><span>04</span>Testing it like an attacker</h2>
-        <p>I attacked the finished system four ways. A pushy broker insisting on a better credit score, a reference number carrying a database command, and a forged compliance letter claiming the limits had been raised all failed. They aimed at parts of the system the AI cannot touch.</p><p>The fourth attack worked on the first attempt: a few lines of text hidden at the bottom of a genuine payslip, addressed to “automated processing systems”. The AI recorded the income as 12,000 euros instead of 7,200, and switched off the warnings that would have exposed it. Every other part of the system then did its job perfectly on a false figure. The lesson: the parts built from exact rules defend themselves; the AI reading documents does not, and a better prompt will not fix it. The write up sets out the code checks that would.</p>
+        <p>I tested the finished system four ways. A pushy broker insisting on a better credit score, a reference number carrying a database command, and a forged compliance letter claiming the limits had been raised all failed. They aimed at parts of the system the AI cannot touch.</p><p>The fourth test worked on the first attempt: a few lines of text hidden at the bottom of a genuine payslip, addressed to “automated processing systems”. The AI recorded the income as 12,000 euros instead of 7,200, and switched off the warnings that would have exposed it. Every other part of the system then did its job perfectly on a false figure. The lesson: the parts built from exact rules defend themselves; the AI reading documents does not, and a better prompt will not fix it. The write up sets out the code checks that would.</p>
       </section>
       <section class="p-section">
         <h2><span>05</span>What came out of it</h2>
