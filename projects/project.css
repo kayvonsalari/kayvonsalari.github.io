@@ -153,6 +153,8 @@ h1 {
 .p-section ul { margin-top: 0.8rem; padding-left: 1.2rem; }
 .p-section li + li { margin-top: 0.35rem; }
 .p-section strong { color: var(--ink); font-weight: 500; }
+.p-section h3 { font-family: var(--serif); font-weight: 400; font-size: 1.1rem; line-height: 1.3; color: var(--ink); margin: 1.5rem 0 0.5rem; }
+.p-section ol { margin-top: 0.8rem; padding-left: 1.2rem; }
 
 .p-figure {
   margin-top: 2rem;
