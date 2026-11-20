@@ -464,6 +464,14 @@
       border: 1px solid var(--rule);
       border-radius: 4px;
     }
+    /* A card that holds a second link (the LinkedIn logo): the title link covers the card, the logo link sits on top */
+    .card { position: relative; }
+    .card-link { color: inherit; text-decoration: none; }
+    .card-link::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+    .card-link:focus-visible { outline: none; }
+    .card:has(.card-link:focus-visible) { box-shadow: 0 0 0 1.5px var(--pc, var(--accent)), 0 14px 36px rgba(20,30,45,0.2); }
+    .card-logos a { position: relative; z-index: 1; transition: border-color 0.15s; }
+    .card-logos a:hover, .card-logos a:focus-visible { border-color: var(--pc, var(--accent)); }
     .card-logos img { display: block; flex: none; width: auto; max-width: none; height: calc(var(--lh) * var(--s, 1)); }
     .card-logos .lg {
       gap: 0.4rem;
@@ -603,15 +611,15 @@
           <div class="card-footer"><span class="card-note"></span><span class="card-arrow">→</span></div>
         </a>
 
-        <a class="card" href="/projects/linkedin-post-generator/" style="--pc: #0b6589;">
+        <div class="card" style="--pc: #0b6589;">
           <div class="card-sector">Content Intelligence</div>
-          <div class="card-title">LinkedIn Post Generator</div>
+          <div class="card-title"><a class="card-link" href="/projects/linkedin-post-generator/">LinkedIn Post Generator</a></div>
           <p class="card-desc">An AI writing team where nothing gets shared until a critic is happy. A researcher gathers material, a writer drafts the post, and a critic scores it against a quality checklist. A supervisor sends the draft back until it passes.</p>
           <div class="card-tags card-logos">
-            <span><img src="/projects/logos/langgraph.svg" alt="LangGraph" loading="lazy" /></span><span><img src="/projects/logos/langchain.svg" alt="LangChain" loading="lazy" /></span><span class="lg"><img src="/projects/logos/openai.svg" alt="" style="--s: 1.5;" loading="lazy" />OpenAI</span>
+            <a href="https://www.linkedin.com/in/salari-kayvon/" target="_blank" rel="noopener"><img src="/projects/logos/linkedin.png" alt="LinkedIn" loading="lazy" /></a><span><img src="/projects/logos/langgraph.svg" alt="LangGraph" loading="lazy" /></span><span><img src="/projects/logos/langchain.svg" alt="LangChain" loading="lazy" /></span><span class="lg"><img src="/projects/logos/openai.svg" alt="" style="--s: 1.5;" loading="lazy" />OpenAI</span>
           </div>
           <div class="card-footer"><span class="card-note"></span><span class="card-arrow">→</span></div>
-        </a>
+        </div>
 
         <a class="card" href="/projects/healthcare-intelligence-assistant/" style="--pc: #a32b45;">
           <div class="card-sector">Healthcare · Data Governance</div>
