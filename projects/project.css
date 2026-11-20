@@ -21,6 +21,17 @@
   --shadow: 0 1px 3px rgba(20,30,45,0.06), 0 6px 16px rgba(20,30,45,0.06);
 }
 
+/* Each project page sets its own --accent on <body>. These follow it. */
+body { --accent-dark: #1857a8; }
+@supports (color: color-mix(in srgb, red, blue)) {
+  body {
+    --accent-pale: color-mix(in srgb, var(--accent) 8%, #fff);
+    --accent-dark: color-mix(in srgb, var(--accent) 82%, #000);
+    --tag-bg: color-mix(in srgb, var(--accent) 11%, #fff);
+    --tag-text: color-mix(in srgb, var(--accent) 70%, #000);
+  }
+}
+
 body {
   font-family: var(--sans);
   background: var(--paper);
@@ -75,8 +86,9 @@ body > nav {
 .p-wrap {
   max-width: var(--read);
   margin: 0 auto;
-  padding: clamp(2rem, 6vw, 3.5rem) var(--gap) clamp(3rem, 7vw, 5rem);
+  padding: 1.1rem var(--gap) clamp(3rem, 7vw, 5rem);
 }
+main { overflow-x: clip; }
 .p-back {
   display: inline-block;
   font-size: 0.8rem;
@@ -84,17 +96,41 @@ body > nav {
   color: var(--ink-mid);
   text-decoration: none;
   letter-spacing: 0.02em;
-  margin-bottom: 2rem;
+  margin-bottom: 1.1rem;
 }
 .p-back:hover { color: var(--accent); }
 
-.p-head { margin-bottom: 2.5rem; }
+/* Coloured header band: full width, in the page's accent colour */
+.p-head {
+  position: relative;
+  padding: clamp(2rem, 6vw, 3rem) 0 clamp(4.5rem, 9vw, 5.5rem);
+  color: #fff;
+}
+.p-head::before {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0; left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+  z-index: -1;
+}
+.p-head .p-icon {
+  display: block;
+  width: 56px; height: 56px;
+  margin-bottom: 1.4rem;
+  border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.18);
+}
+.p-icon-tile { fill: #fff; }
+.p-icon-glyph { stroke: var(--accent); color: var(--accent); }
+.p-icon-bw .p-icon-glyph { stroke: #16191c; color: #16191c; }
 .p-sector {
   font-size: 0.72rem;
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: rgba(255,255,255,0.92);
   margin-bottom: 0.9rem;
 }
 h1 {
@@ -102,30 +138,44 @@ h1 {
   font-size: clamp(2rem, 5vw, 3rem);
   line-height: 1.08;
   letter-spacing: -0.02em;
-  color: var(--ink);
+  color: #fff;
 }
 .p-lead {
   margin-top: 1.2rem;
   font-size: 1.1rem;
-  font-weight: 300;
-  color: var(--ink-mid);
+  font-weight: 400;
+  color: rgba(255,255,255,0.95);
   line-height: 1.7;
 }
 .p-note {
   margin-top: 0.9rem;
   font-size: 0.8rem;
   font-style: italic;
-  color: var(--ink-light);
+  color: rgba(255,255,255,0.92);
 }
 
 .p-body {
+  --pad: clamp(1.5rem, 4vw, 2.5rem);
+  position: relative;
+  margin-top: -2.5rem;
   background: var(--card-bg);
   border: 1px solid var(--rule);
+  border-top: 4px solid var(--accent);
   border-radius: 6px;
   box-shadow: var(--shadow);
-  padding: clamp(1.5rem, 4vw, 2.5rem);
+  padding: 0 var(--pad) var(--pad);
+  overflow: hidden;
 }
-.p-section + .p-section { margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--rule); }
+/* Sections run edge to edge inside the card; every second one is tinted */
+.p-section {
+  margin: 0 calc(-1 * var(--pad));
+  padding: 2rem var(--pad);
+  border-left: 3px solid transparent;
+}
+.p-section:nth-of-type(even) {
+  background: var(--accent-pale);
+  border-left-color: var(--accent);
+}
 .p-section h2 {
   font-family: var(--serif);
   font-weight: 400;
@@ -136,13 +186,18 @@ h1 {
   margin-bottom: 0.8rem;
 }
 .p-section h2 span {
+  display: inline-block;
   font-family: var(--sans);
   font-size: 0.7rem;
   font-weight: 500;
-  letter-spacing: 0.14em;
-  color: var(--ink-light);
-  margin-right: 0.8em;
-  vertical-align: 0.25em;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  color: #fff;
+  background: var(--accent);
+  padding: 0.4em 0.55em 0.4em 0.65em;
+  border-radius: 3px;
+  margin-right: 0.9em;
+  vertical-align: 0.3em;
 }
 .p-section p, .p-section li {
   font-size: 1rem;
@@ -153,10 +208,12 @@ h1 {
 .p-section ul { margin-top: 0.8rem; padding-left: 1.2rem; }
 .p-section li + li { margin-top: 0.35rem; }
 .p-section strong { color: var(--ink); font-weight: 500; }
+.p-section h3 { font-family: var(--serif); font-weight: 400; font-size: 1.1rem; line-height: 1.3; color: var(--accent-dark); margin: 1.5rem 0 0.5rem; }
+.p-section li::marker { color: var(--accent); }
+.p-section ol { margin-top: 0.8rem; padding-left: 1.2rem; }
 
 .p-figure {
-  margin-top: 2rem;
-  padding-top: 2rem;
+  padding: 2rem 0;
   border-top: 1px solid var(--rule);
 }
 .p-figure img { display: block; width: 100%; height: auto; }
@@ -168,7 +225,6 @@ h1 {
 }
 
 .p-built {
-  margin-top: 2rem;
   padding-top: 1.6rem;
   border-top: 1px solid var(--rule);
 }
@@ -177,24 +233,46 @@ h1 {
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--ink-light);
+  color: var(--accent);
   margin-bottom: 0.7rem;
 }
-.card-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+/* Built-with list. An item with a brand logo shows the official, unaltered
+   logo on its own white panel, with the item text beside it. */
+.card-tags { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0.5rem; }
 .tag {
+  display: inline-flex;
+  align-items: center;
   background: var(--tag-bg);
   color: var(--tag-text);
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   font-weight: 500;
-  padding: 0.25rem 0.55rem;
-  border-radius: 2px;
-  letter-spacing: 0.03em;
+  padding: 0.5rem 0.8rem;
+  min-height: 3.4rem;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+}
+.tag.has-logo {
+  padding: 0;
+  background: #fff;
+  border: 1.5px solid var(--ink-light);
+  overflow: hidden;
+}
+.tag-logo { display: flex; align-items: center; align-self: stretch; padding: 0.6rem 0.85rem; background: #fff; }
+.tag-logo img { display: block; width: auto; max-width: none; }
+.tag.has-logo > span {
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  padding: 0.5rem 0.8rem;
+  background: var(--tag-bg);
+  border-left: 1.5px solid var(--ink-light);
 }
 
 .p-cta {
   margin-top: 2rem;
   padding: 1.2rem 1.3rem;
   background: var(--accent-pale);
+  border-left: 3px solid var(--accent);
   border-radius: 4px;
   display: flex;
   align-items: center;
@@ -215,7 +293,7 @@ h1 {
   transition: all 0.15s;
 }
 .btn-primary { background: var(--accent); color: #fff; }
-.btn-primary:hover { background: #1857a8; }
+.btn-primary:hover { background: var(--accent-dark); }
 
 /* PREVIOUS / NEXT */
 .p-pn {

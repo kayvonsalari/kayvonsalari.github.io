@@ -197,9 +197,10 @@
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      border: 1.5px solid var(--rule);
-      border-radius: 6px;
-      overflow: hidden;
+      /* Top and left edges here; each card draws its own right and bottom edge.
+         Nothing is clipped, so a card can grow over its neighbours. */
+      border-top: 1.5px solid var(--rule);
+      border-left: 1.5px solid var(--rule);
     }
     @media (max-width: 900px) {
       .projects-grid { grid-template-columns: repeat(2, 1fr); }
@@ -219,16 +220,65 @@
       text-decoration: none;
       color: inherit;
       transition: background 0.15s;
+      /* --pc is the card's own project colour, set on each card */
+      --pc-pale: var(--accent-pale);
     }
-    .card:hover { background: var(--accent-pale); }
+    @supports (color: color-mix(in srgb, red, blue)) {
+      .card { --pc-pale: color-mix(in srgb, var(--pc, var(--accent)) 7%, #fff); }
+    }
+    .card:hover { background: var(--pc-pale); }
     .card:hover .card-arrow { transform: translateX(4px); }
+
+    /* Focus effect: the card under the mouse grows a little and stays sharp;
+       the others sit behind frosted glass. Mouse and keyboard only. On touch
+       screens a tap opens the page straight away, so cards stay plain there. */
+    @media (hover: hover) and (pointer: fine) {
+      .card {
+        position: relative;
+        transition: background 0.15s, transform 0.18s ease-out, box-shadow 0.18s ease-out;
+      }
+      .card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(236, 238, 241, 0.42);
+        -webkit-backdrop-filter: blur(2px);
+        backdrop-filter: blur(2px);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 0.18s ease-out, visibility 0s 0.18s;
+      }
+      .projects-grid:hover .card:not(:hover)::after,
+      .projects-grid:has(.card:focus-visible) .card:not(:focus-visible):not(:hover)::after {
+        opacity: 1;
+        visibility: visible;
+        transition-delay: 0s;
+      }
+      .card:hover, .card:focus-visible {
+        transform: scale(1.03);
+        z-index: 2;
+        box-shadow: 0 0 0 1.5px var(--pc, var(--accent)), 0 10px 30px rgba(20,30,45,0.18);
+        outline: none;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .card, .card::after, .card-arrow { transition: none; }
+      .card:hover, .card:focus-visible { transform: none; }
+      .card:hover .card-arrow { transform: none; }
+    }
+
+    .p-icon { display: block; width: 36px; height: 36px; margin-bottom: 0.95rem; flex-shrink: 0; }
+    .p-icon-tile { fill: var(--pc, var(--accent)); }
+    .p-icon-glyph { stroke: #fff; color: #fff; }
+    .p-icon-bw .p-icon-tile { fill: #16191c; }
 
     .card-sector {
       font-size: 0.65rem;
       font-weight: 500;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--accent);
+      color: var(--pc, var(--accent));
       margin-bottom: 0.7rem;
     }
     .card-title {
@@ -273,7 +323,7 @@
     }
     .card-arrow {
       font-size: 0.9rem;
-      color: var(--accent);
+      color: var(--pc, var(--accent));
       transition: transform 0.2s;
       flex-shrink: 0;
     }
@@ -366,7 +416,7 @@
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <a class="nav-logo" href="#">kayvonsalari.github.io</a>
+    <a class="nav-logo" href="#">kayvonsalari.com</a>
     <ul class="nav-links">
       <li><a href="#projects">Projects</a></li>
       <li><a href="#about">About</a></li>
@@ -422,7 +472,8 @@
       <p style="font-size: 0.975rem; font-weight: 300; color: var(--ink-mid); max-width: 52ch; line-height: 1.75; margin-bottom: 2.5rem;">Building now, with new systems and code going out regularly.</p>
       <div class="projects-grid">
 
-        <a class="card" href="/projects/aristos-council/">
+        <a class="card" href="/projects/aristos-council/" style="--pc: #1c5aa6;">
+          <svg class="p-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="9" fill="#7FB2FF"/><path d="M15.89 7.5 23.6 24.36H19.37L14.46 12.05ZM10.82 22.78Q10.62 23.25 10.74 23.58Q10.86 23.91 11.15 24.09Q11.43 24.26 11.72 24.26H11.93V24.5H6.87V24.26Q6.87 24.26 6.97 24.26Q7.08 24.26 7.08 24.26Q7.62 24.26 8.2 23.92Q8.78 23.58 9.16 22.78ZM15.89 7.5 15.98 10.39 10.12 24.43H8.41L14.52 10.59Q14.59 10.46 14.77 10.07Q14.94 9.67 15.14 9.17Q15.35 8.68 15.51 8.22Q15.67 7.76 15.68 7.5ZM18.38 18.87V19.87H11.42V18.87ZM18.72 22.78H22.87Q23.25 23.58 23.83 23.92Q24.4 24.26 24.94 24.26Q24.94 24.26 25.04 24.26Q25.13 24.26 25.13 24.26V24.5H17.61V24.26H17.83Q18.29 24.26 18.65 23.87Q19.01 23.48 18.72 22.78Z" fill="#0E1217"/></svg>
           <div class="card-sector">Investment Intelligence &middot; Multi Strategy</div>
           <div class="card-title">Aristos Council: Equity Research You Can Audit</div>
           <p class="card-desc">An equity research system based on one idea: AI you can audit. A company is compared with peers from about 25,000 listed companies and checked with a set of stock strategies, each asking one simple question: cheap and good, growing at a fair price, steady income, durable business. A separate check asks whether the profits are real. The result is fully deterministic: the maths decides, the AI writes, and a fact checker reads every sentence against the numbers. Every strategy has a ten year backtest record per industry, and a blind three model judge panel gives a second opinion with no vote. Public repo, more than 5,000 tests.</p>
@@ -432,7 +483,8 @@
           <div class="card-footer"><span class="card-note"></span><span class="card-arrow">→</span></div>
         </a>
 
-        <a class="card" href="/projects/databricks-underwriting-agent/">
+        <a class="card" href="/projects/databricks-underwriting-agent/" style="--pc: #a8401c;">
+          <svg class="p-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect class="p-icon-tile" width="32" height="32" rx="9"/><g class="p-icon-glyph" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 7.5h6.5L22 12v12.5H11z"/><path d="M17.5 7.5V12H22"/><path d="M13.6 18.6l2.1 2.1 3.8-4.2"/></g></svg>
           <div class="card-sector">Financial Services &middot; Platform Engineering</div>
           <div class="card-title">Governed Document to Decision Agent on Databricks</div>
           <p class="card-desc">Mortgage paperwork goes in; six figures come out, each tied to the document it came from, with anything that does not add up flagged. The decision never touches the model: a Unity Catalog SQL function applies the lending rules from a policy table, and anything short of a clean pass is sent to a person with a drafted case note. I then tested it four ways. Three attacks failed; a note hidden in a real payslip fooled the AI on the first try. The README is a clear field report on why, and on the code checks that would stop it. Served as an MLflow endpoint and traced end to end.</p>
@@ -442,7 +494,8 @@
           <div class="card-footer"><span class="card-note"></span><span class="card-arrow">→</span></div>
         </a>
 
-        <a class="card" href="/projects/duallens/">
+        <a class="card" href="/projects/duallens/" style="--pc: #4340a3;">
+          <svg class="p-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect class="p-icon-tile" width="32" height="32" rx="9"/><g class="p-icon-glyph" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="16" r="5.6"/><circle cx="19" cy="16" r="5.6"/></g></svg>
           <div class="card-sector">Investment Research</div>
           <div class="card-title">AI-Powered Investment Research Platform</div>
           <p class="card-desc">Analysts spend hours comparing market data with strategy documents. DualLens ranks companies on both at once — three years of stock performance combined with insights RAG-extracted from strategy PDFs — so it is clear which names are financially strong <em>and</em> ready for AI adoption. One query replaces the manual comparison loop.</p>
@@ -452,7 +505,8 @@
           <div class="card-footer"><span class="card-note"></span><span class="card-arrow">→</span></div>
         </a>
 
-        <a class="card" href="/projects/financial-research-analyst/">
+        <a class="card" href="/projects/financial-research-analyst/" style="--pc: #0c6a6e;">
+          <svg class="p-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect class="p-icon-tile" width="32" height="32" rx="9"/><g class="p-icon-glyph" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="14.5" cy="14.5" r="6.2"/><path d="M19.1 19.1L24 24"/><path d="M11.4 16.2l2-2.3 1.7 1.5 2.3-2.9"/></g></svg>
           <div class="card-sector">Investment Intelligence</div>
           <div class="card-title">Autonomous Financial Research Analyst</div>
           <p class="card-desc">Per-company investment research takes an analyst 4–6 hours; this LangGraph agent does the gathering in minutes. It pulls real-time market data, news sentiment, and private analyst reports, then gives a Buy/Hold/Sell recommendation with every source cited — easy to check and fast enough to run across a watchlist. The predecessor to Aristos Council, where its single-agent verdict grew into a gated, deterministic decision core.</p>
@@ -462,7 +516,8 @@
           <div class="card-footer"><span class="card-note"></span><span class="card-arrow">→</span></div>
         </a>
 
-        <a class="card" href="/projects/mortgage-underwriting/">
+        <a class="card" href="/projects/mortgage-underwriting/" style="--pc: #2a6a3c;">
+          <svg class="p-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect class="p-icon-tile" width="32" height="32" rx="9"/><g class="p-icon-glyph" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7.8 15.2L16 8l8.2 7.2"/><path d="M10.3 13.6V24h11.4V13.6"/><path d="M14.3 24v-5.2h3.4V24"/></g></svg>
           <div class="card-sector">Financial Services</div>
           <div class="card-title">Senior Mortgage Underwriting System</div>
           <p class="card-desc">Mortgage underwriting takes 3–5 days mainly because four checks — credit, income, assets, collateral — wait one after another. This system runs them as specialist agents under a Supervisor, cutting the cycle to hours while keeping the parts regulators care about: Fair-Lending compliance, PII protection, bias detection, and mandatory human-in-the-loop escalation on every contested file.</p>
@@ -472,7 +527,8 @@
           <div class="card-footer"><span class="card-note"></span><span class="card-arrow">→</span></div>
         </a>
 
-        <a class="card" href="/projects/ms-risk-screening/">
+        <a class="card" href="/projects/ms-risk-screening/" style="--pc: #84306e;">
+          <svg class="p-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect class="p-icon-tile" width="32" height="32" rx="9"/><g class="p-icon-glyph" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="8.4"/><path d="M10.6 16h2.4l1.5-3.4 2.8 6.8 1.6-3.4h2.5"/></g></svg>
           <div class="card-sector">Clinical Decision Support</div>
           <div class="card-title">MS Risk Screening Agent</div>
           <p class="card-desc">Early multiple-sclerosis signals are spread across EHR records, where no one has time to connect them. This multi-agent system scans records and flags patients showing early risk patterns for neurologist review — with adjustable autonomy, a clear reason for every flag, and PHI governance throughout. It surfaces candidates for clinical judgment; it does not replace it.</p>
@@ -482,7 +538,8 @@
           <div class="card-footer"><span class="card-note"></span><span class="card-arrow">→</span></div>
         </a>
 
-        <a class="card" href="/projects/agi-research-intelligence/">
+        <a class="card" href="/projects/agi-research-intelligence/" style="--pc: #6a3aa3;">
+          <svg class="p-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect class="p-icon-tile" width="32" height="32" rx="9"/><g class="p-icon-glyph" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16.6" r="2.3"/><circle cx="16" cy="8.8" r="1.9"/><circle cx="9.4" cy="21.6" r="1.9"/><circle cx="22.6" cy="21.6" r="1.9"/><path d="M16 10.7v3.6M11 20.4l3-2.3M21 20.4l-3-2.3"/></g></svg>
           <div class="card-sector">Research Intelligence</div>
           <div class="card-title">AGI Research Intelligence Platform</div>
           <p class="card-desc">Keeping up with AGI-relevant research on arXiv takes weeks by hand and still gives partial coverage. A Planner→Discovery→Evaluation agent pipeline automates it, scoring every paper against a standard 10-parameter AGI framework — literature review in hours, with 3–5× the coverage of manual survey.</p>
@@ -492,7 +549,8 @@
           <div class="card-footer"><span class="card-note"></span><span class="card-arrow">→</span></div>
         </a>
 
-        <a class="card" href="/projects/linkedin-post-generator/">
+        <a class="card" href="/projects/linkedin-post-generator/" style="--pc: #0b6589;">
+          <svg class="p-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect class="p-icon-tile" width="32" height="32" rx="9"/><g class="p-icon-glyph" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9.2 9h13.6a1.2 1.2 0 011.2 1.2v8.6a1.2 1.2 0 01-1.2 1.2H16l-3.6 3.2V20H9.2A1.2 1.2 0 018 18.800V10.2A1.2 1.2 0 019.2 9z"/><path d="M11.6 13h8.8M11.6 16.2h5.6"/></g></svg>
           <div class="card-sector">Content Intelligence</div>
           <div class="card-title">LinkedIn Post Generator</div>
           <p class="card-desc">A content pipeline with editorial standards built in: a Researcher gathers material, a Writer drafts, a Critic scores against a quality rubric, and a Supervisor repeats the loop until the draft clears the bar. The key part is the loop — generation that does not ship until an adversarial agent approves it.</p>
@@ -502,7 +560,8 @@
           <div class="card-footer"><span class="card-note"></span><span class="card-arrow">→</span></div>
         </a>
 
-        <a class="card" href="/projects/healthcare-intelligence-assistant/">
+        <a class="card" href="/projects/healthcare-intelligence-assistant/" style="--pc: #a32b45;">
+          <svg class="p-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect class="p-icon-tile" width="32" height="32" rx="9"/><g class="p-icon-glyph" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="16" cy="10.4" rx="6.6" ry="2.6"/><path d="M9.4 10.4v11.2c0 1.4 3 2.6 6.600 2.6s6.600-1.200 6.600-2.600V10.400"/><path d="M16 15v5M13.500 17.500h5"/></g></svg>
           <div class="card-sector">Healthcare · Data Governance</div>
           <div class="card-title">Healthcare Intelligence Assistant</div>
           <p class="card-desc">Clinicians wait on DBAs for every data question. This Natural Language-to-SQL system lets them ask directly — and keeps it safe by classifying every query before execution: READ runs automatically, WRITE needs human approval, UNSAFE is rejected outright. Full audit trails keep it inside HIPAA and GDPR.</p>
@@ -512,7 +571,8 @@
           <div class="card-footer"><span class="card-note"></span><span class="card-arrow">→</span></div>
         </a>
 
-        <a class="card" href="/projects/mucatlas/">
+        <a class="card" href="/projects/mucatlas/" style="--pc: #1e3a5f;">
+          <svg class="p-icon p-icon-bw" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect class="p-icon-tile" width="32" height="32" rx="9"/><g class="p-icon-glyph" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(16 16.500) scale(1.200) translate(-16 -17)"><path fill="currentColor" stroke="none" d="M6 24v-4h1.500v-5l1-4.500 1 4.500v5H12v-6.800a1.500 1.500 0 0 1 3 0V18h2v-4.800a1.500 1.500 0 0 1 3 0V20h2v-2.500a1.750 1.750 0 0 1 3.500 0V20H26v4z"/><path d="M13.500 11.600V9.900M18.500 11.600V9.900"/></g></g></svg>
           <div class="card-sector">Public Sector · Knowledge Management</div>
           <div class="card-title">MucAtlas — Municipal Knowledge Agent</div>
           <p class="card-desc">City caseworkers lose time searching across fragmented internal sources of unknown currency. MucAtlas (Munich Innovation Challenge 2026 entry) is a five-agent RAG system that connects those sources, checks whether legal documents are still current, finds contradictions between sources, and returns cited answers in seconds — with full data sovereignty via confidential computing. Architecture and design; competition entry.</p>
@@ -522,7 +582,8 @@
           <div class="card-footer"><span class="card-note">Architecture &amp; design — competition entry</span><span class="card-arrow">→</span></div>
         </a>
 
-        <a class="card" href="/projects/warehouse-robot-navigation/">
+        <a class="card" href="/projects/warehouse-robot-navigation/" style="--pc: #4b5563;">
+          <svg class="p-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect class="p-icon-tile" width="32" height="32" rx="9"/><g class="p-icon-glyph" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9.5" y="12.2" width="13" height="10.300" rx="2.600"/><path d="M16 12.200V9.600"/><circle cx="16" cy="8.300" r="1.300"/><circle cx="13.400" cy="16.400" r="1.100"/><circle cx="18.600" cy="16.400" r="1.100"/><path d="M13.600 19.600h4.800"/><path d="M7.300 16v3M24.700 16v3"/></g></svg>
           <div class="card-sector">Logistics &amp; Robotics</div>
           <div class="card-title">Warehouse Robot Navigation</div>
           <p class="card-desc">Programming warehouse robot routes by hand does not scale past the first layout change. This reinforcement-learning agent (PPO) learns goal-directed navigation from scratch and generalises to layouts it has never seen — pathfinding as a learned skill rather than a maintained ruleset.</p>
@@ -532,7 +593,8 @@
           <div class="card-footer"><span class="card-note"></span><span class="card-arrow">→</span></div>
         </a>
 
-        <a class="card" href="/projects/tennis-oracle/">
+        <a class="card" href="/projects/tennis-oracle/" style="--pc: #5f6b14;">
+          <svg class="p-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect class="p-icon-tile" width="32" height="32" rx="9"/><g class="p-icon-glyph" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="8.300"/><path d="M10.300 10c2.900 2.700 2.900 9.300 0 12M21.700 10c-2.900 2.700-2.900 9.300 0 12"/></g></svg>
           <div class="card-sector">Sports Analytics &middot; Agent Protocol</div>
           <div class="card-title">Tennis Oracle — Deterministic Match Prediction</div>
           <p class="card-desc">Betting markets price the top of the game well and ignore the bottom entirely. Tennis Oracle rates every ATP and WTA player from a million matches — tour, Challenger and ITF — and predicts at 65% where the market sits at 68%, but at 70% on women's ITF events no bookmaker prices at all. Verdicts come from surface-adjusted Glicko-2; the LLM only narrates. Speaks the A2A agent protocol, and a blind test of 197 matches showed the model analyst losing to the ratings by 7.6 points, which is why it narrates.</p>
