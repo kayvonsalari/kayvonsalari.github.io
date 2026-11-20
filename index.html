@@ -43,8 +43,7 @@
     /* ── NAV ── */
     nav {
       position: sticky; top: 0; z-index: 100;
-      background: rgba(247,245,240,0.94);
-      backdrop-filter: blur(12px);
+      background: rgba(247,245,240,0.97);
       border-bottom: 1px solid var(--rule);
     }
     .nav-inner {
@@ -229,42 +228,30 @@
     .card:hover { background: var(--pc-pale); }
     .card:hover .card-arrow { transform: translateX(4px); }
 
-    /* Focus effect: the card under the mouse grows a little and stays sharp;
-       the others sit behind frosted glass. Mouse and keyboard only. On touch
-       screens a tap opens the page straight away, so cards stay plain there. */
+    /* Focus effect: the card under the mouse grows a little and comes forward;
+       the others shrink slightly into the background. No blur. Mouse and
+       keyboard only. On touch screens a tap opens the page straight away,
+       so cards stay plain there. */
     @media (hover: hover) and (pointer: fine) {
       .card {
         position: relative;
-        transition: background 0.15s, transform 0.18s ease-out, box-shadow 0.18s ease-out;
+        transition: background 0.15s, transform 0.2s ease-out, box-shadow 0.2s ease-out, opacity 0.2s ease-out;
       }
-      .card::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: rgba(236, 238, 241, 0.22);
-        -webkit-backdrop-filter: blur(0.6px);
-        backdrop-filter: blur(0.6px);
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-        transition: opacity 0.18s ease-out, visibility 0s 0.18s;
-      }
-      .projects-grid:has(.card:hover) .card:not(:hover)::after,
-      .projects-grid:has(.card:focus-visible) .card:not(:focus-visible):not(:hover)::after {
-        opacity: 1;
-        visibility: visible;
-        transition-delay: 0s;
+      .projects-grid:has(.card:hover) .card:not(:hover),
+      .projects-grid:has(.card:focus-visible) .card:not(:focus-visible):not(:hover) {
+        transform: scale(0.965);
+        opacity: 0.72;
       }
       .card:hover, .card:focus-visible {
-        transform: scale(1.03);
+        transform: scale(1.04);
         z-index: 2;
-        box-shadow: 0 0 0 1.5px var(--pc, var(--accent)), 0 10px 30px rgba(20,30,45,0.18);
+        box-shadow: 0 0 0 1.5px var(--pc, var(--accent)), 0 14px 36px rgba(20,30,45,0.2);
         outline: none;
       }
     }
     @media (prefers-reduced-motion: reduce) {
-      .card, .card::after, .card-arrow { transition: none; }
-      .card:hover, .card:focus-visible { transform: none; }
+      .card, .card-arrow { transition: none; }
+      .projects-grid .card.card { transform: none; }
       .card:hover .card-arrow { transform: none; }
     }
 
@@ -419,11 +406,7 @@
         var(--paper);
       background-repeat: no-repeat;
     }
-    nav {
-      background: rgba(236, 238, 241, 0.72);
-      -webkit-backdrop-filter: blur(14px) saturate(1.3);
-      backdrop-filter: blur(14px) saturate(1.3);
-    }
+    nav { background: rgba(236, 238, 241, 0.97); }
     @media (max-width: 480px) {
       .nav-inner { gap: 0.75rem; }
       .nav-logo { font-size: 0.95rem; }
@@ -434,12 +417,10 @@
       .nav-logo { font-size: 0.85rem; }
       .nav-links { gap: 0.6rem; }
     }
-    /* Frosted glass panels */
+    /* Panels: solid white, no blur */
     .stat, .cert, .contact-card {
-      background: rgba(255, 255, 255, 0.5);
-      -webkit-backdrop-filter: blur(12px) saturate(1.25);
-      backdrop-filter: blur(12px) saturate(1.25);
-      border: 1px solid rgba(255, 255, 255, 0.85);
+      background: #fff;
+      border: 1px solid var(--rule);
       border-radius: 10px;
       box-shadow: 0 1px 2px rgba(20,30,45,0.05), 0 10px 28px rgba(20,30,45,0.08);
     }
@@ -462,28 +443,33 @@
       border-top: 3px solid var(--pc, var(--accent));
       border-radius: 10px;
       box-shadow: 0 1px 2px rgba(20,30,45,0.05), 0 8px 22px rgba(20,30,45,0.07);
-      container-type: inline-size;
     }
-    .card::after { border-radius: inherit; }
-    /* Official product logos in place of the text tags: one line, one height.
-       --lh is the logo height; it shrinks with the card so four always fit. */
+    @media (min-width: 581px) { .card { min-height: 27rem; } }
+    /* Official product logos in place of the text tags: boxed like the
+       Built-with list on the project pages, all one height, wrapping to a second row if needed. */
     .card-logos {
-      --lh: 12px;
-      flex-wrap: nowrap;
-      align-items: center;
-      gap: calc(var(--lh) * 0.9);
-      height: 26px;
+      --lh: 17px;
+      flex-wrap: wrap;
+      align-items: stretch;
+      gap: 0.32rem;
       margin-top: 1.3rem;
       font-size: 0.7rem; line-height: 1; color: var(--ink-mid);
-      overflow: hidden;
     }
-    @supports (width: 1cqi) { .card-logos { --lh: min(15px, 4.0cqi); } }
+    .card-logos > * {
+      display: inline-flex; align-items: center; flex: none;
+      box-sizing: border-box;
+      height: calc(var(--lh) + 15px);
+      padding: 0 0.5rem;
+      background: #fff;
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+    }
     .card-logos img { display: block; flex: none; width: auto; max-width: none; height: calc(var(--lh) * var(--s, 1)); }
     .card-logos .lg {
-      display: inline-flex; align-items: center; flex: none;
-      gap: calc(var(--lh) * 0.38);
-      font-size: calc(var(--lh) * 0.84); font-weight: 500; line-height: 1; white-space: nowrap; color: var(--ink);
+      gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 500; line-height: 1; white-space: nowrap; color: var(--ink);
     }
+    @media (min-width: 901px) and (max-width: 1179px) { .projects-grid { grid-template-columns: repeat(2, 1fr); } }
   </style>
 </head>
 <body>
@@ -550,9 +536,9 @@
         <a class="card" href="/projects/aristos-council/" style="--pc: #1c5aa6;">
           <div class="card-sector">Investment Intelligence &middot; Multi Strategy</div>
           <div class="card-title">Aristos Council: Equity Research You Can Audit</div>
-          <p class="card-desc">A stock research tool that uses fixed rules for every buy, hold or sell call, while AI only writes the explanation.</p>
+          <p class="card-desc">A stock research tool that uses fixed rules for every buy, hold or sell call, while AI only writes the explanation. Each company is compared with peers from about 25,000 listed companies and checked against a set of simple strategies. A fact checker reads every sentence against the numbers, and every strategy has a ten year backtest record.</p>
           <div class="card-tags card-logos">
-            <img src="/projects/logos/langgraph.svg" alt="LangGraph" loading="lazy" /><img src="/projects/logos/langsmith.svg" alt="LangSmith" style="--s: 0.82;" loading="lazy" /><span class="lg"><img src="/projects/logos/github.svg" alt="" loading="lazy" />GitHub</span><span class="lg"><img src="/projects/logos/yahoo-finance.svg" alt="" loading="lazy" />Yahoo Finance</span>
+            <span><img src="/projects/logos/langgraph.svg" alt="LangGraph" loading="lazy" /></span><span><img src="/projects/logos/langsmith.svg" alt="LangSmith" style="--s: 0.8;" loading="lazy" /></span><span class="lg"><img src="/projects/logos/github.svg" alt="" loading="lazy" />GitHub</span><span class="lg"><img src="/projects/logos/yahoo-finance.svg" alt="" loading="lazy" />Yahoo Finance</span><span class="lg"><img src="/projects/logos/eodhd.png" alt="" style="--s: 1.5;" loading="lazy" />EODHD</span>
           </div>
           <div class="card-footer"><span class="card-note"></span><span class="card-arrow">→</span></div>
         </a>
@@ -560,9 +546,9 @@
         <a class="card" href="/projects/databricks-underwriting-agent/" style="--pc: #a8401c;">
           <div class="card-sector">Financial Services &middot; Platform Engineering</div>
           <div class="card-title">Governed Document to Decision Agent on Databricks</div>
-          <p class="card-desc">A project that reads loan papers and pulls out the numbers, while fixed rules make the decision. Then I tested it to see where it breaks.</p>
+          <p class="card-desc">A project that reads loan papers and pulls out the numbers, while fixed rules make the decision. Each figure is tied to the document it came from, and anything that does not add up goes to a person. Then I attacked it four ways: three attacks failed, and a note hidden in a real payslip fooled the AI on the first try.</p>
           <div class="card-tags card-logos">
-            <img src="/projects/logos/databricks.svg" alt="Databricks" loading="lazy" /><img src="/projects/logos/unity-catalog.png" alt="Unity Catalog" style="--s: 1.25;" loading="lazy" /><span class="lg"><img src="/projects/logos/mlflow.svg" alt="" loading="lazy" />MLflow</span><img src="/projects/logos/meta.svg" alt="Meta" style="--s: 0.8;" loading="lazy" />
+            <span><img src="/projects/logos/databricks.svg" alt="Databricks" loading="lazy" /></span><span><img src="/projects/logos/unity-catalog.png" alt="Unity Catalog" style="--s: 1.2;" loading="lazy" /></span><span class="lg"><img src="/projects/logos/mlflow.svg" alt="" loading="lazy" />MLflow</span><span><img src="/projects/logos/meta.svg" alt="Meta" style="--s: 0.8;" loading="lazy" /></span><span class="lg"><img src="/projects/logos/promptfoo.svg" alt="" style="--s: 1.15;" loading="lazy" />Promptfoo</span>
           </div>
           <div class="card-footer"><span class="card-note"></span><span class="card-arrow">→</span></div>
         </a>
@@ -570,9 +556,9 @@
         <a class="card" href="/projects/duallens/" style="--pc: #4340a3;">
           <div class="card-sector">Investment Research</div>
           <div class="card-title">AI-Powered Investment Research Platform</div>
-          <p class="card-desc">Shows how companies have done on the market and what they say about their AI plans in one step.</p>
+          <p class="card-desc">Shows how companies have done on the market and what they say about their AI plans in one step. It combines three years of stock performance with insights pulled from strategy documents. One question replaces hours of comparing the two by hand.</p>
           <div class="card-tags card-logos">
-            <img src="/projects/logos/langchain.svg" alt="LangChain" loading="lazy" /><img src="/projects/logos/chroma.svg" alt="Chroma" loading="lazy" /><span class="lg"><img src="/projects/logos/yahoo-finance.svg" alt="" loading="lazy" />Yahoo Finance</span><span class="lg"><img src="/projects/logos/openai.svg" alt="" style="--s: 1.7;" loading="lazy" />OpenAI</span>
+            <span><img src="/projects/logos/langchain.svg" alt="LangChain" loading="lazy" /></span><span><img src="/projects/logos/chroma.svg" alt="Chroma" loading="lazy" /></span><span class="lg"><img src="/projects/logos/yahoo-finance.svg" alt="" loading="lazy" />Yahoo Finance</span><span class="lg"><img src="/projects/logos/openai.svg" alt="" style="--s: 1.5;" loading="lazy" />OpenAI</span>
           </div>
           <div class="card-footer"><span class="card-note"></span><span class="card-arrow">→</span></div>
         </a>
@@ -580,9 +566,9 @@
         <a class="card" href="/projects/financial-research-analyst/" style="--pc: #0c6a6e;">
           <div class="card-sector">Investment Intelligence</div>
           <div class="card-title">Autonomous Financial Research Analyst</div>
-          <p class="card-desc">An AI agent that gathers company research in minutes and shows the source for every point.</p>
+          <p class="card-desc">An AI agent that gathers company research in minutes and shows the source for every point. It pulls live market data, news sentiment and private analyst reports, then gives a buy, hold or sell recommendation. It was the predecessor to Aristos Council.</p>
           <div class="card-tags card-logos">
-            <img src="/projects/logos/langgraph.svg" alt="LangGraph" loading="lazy" /><img src="/projects/logos/langchain.svg" alt="LangChain" loading="lazy" /><span class="lg"><img src="/projects/logos/tavily.svg" alt="" loading="lazy" />Tavily</span><span class="lg"><img src="/projects/logos/openai.svg" alt="" style="--s: 1.7;" loading="lazy" />OpenAI</span>
+            <span><img src="/projects/logos/langgraph.svg" alt="LangGraph" loading="lazy" /></span><span><img src="/projects/logos/langchain.svg" alt="LangChain" loading="lazy" /></span><span class="lg"><img src="/projects/logos/tavily.svg" alt="" loading="lazy" />Tavily</span><span class="lg"><img src="/projects/logos/openai.svg" alt="" style="--s: 1.5;" loading="lazy" />OpenAI</span>
           </div>
           <div class="card-footer"><span class="card-note"></span><span class="card-arrow">→</span></div>
         </a>
@@ -590,9 +576,9 @@
         <a class="card" href="/projects/mortgage-underwriting/" style="--pc: #2a6a3c;">
           <div class="card-sector">Financial Services</div>
           <div class="card-title">Senior Mortgage Underwriting System</div>
-          <p class="card-desc">Four specialist AI agents check a mortgage at the same time, with a person stepping in on every contested case.</p>
+          <p class="card-desc">Four specialist AI agents check a mortgage at the same time, with a person stepping in on every contested case. Credit, income, assets and collateral are assessed side by side instead of one after another, cutting the cycle from days to hours. Fair lending checks, privacy protection and bias detection stay in place.</p>
           <div class="card-tags card-logos">
-            <img src="/projects/logos/langgraph.svg" alt="LangGraph" loading="lazy" /><img src="/projects/logos/chroma.svg" alt="Chroma" loading="lazy" />
+            <span><img src="/projects/logos/langgraph.svg" alt="LangGraph" loading="lazy" /></span><span><img src="/projects/logos/chroma.svg" alt="Chroma" loading="lazy" /></span>
           </div>
           <div class="card-footer"><span class="card-note"></span><span class="card-arrow">→</span></div>
         </a>
@@ -600,9 +586,9 @@
         <a class="card" href="/projects/ms-risk-screening/" style="--pc: #84306e;">
           <div class="card-sector">Clinical Decision Support</div>
           <div class="card-title">MS Risk Screening Agent</div>
-          <p class="card-desc">Looks for early signs of multiple sclerosis in patient records and passes them to a specialist to review.</p>
+          <p class="card-desc">Looks for early signs of multiple sclerosis in patient records and passes them to a specialist to review. Every flag comes with a clear reason, and the level of autonomy can be adjusted. It supports the neurologist’s judgment; it does not replace it.</p>
           <div class="card-tags card-logos">
-            <img src="/projects/logos/langchain.svg" alt="LangChain" loading="lazy" />
+            <span><img src="/projects/logos/langchain.svg" alt="LangChain" loading="lazy" /></span>
           </div>
           <div class="card-footer"><span class="card-note"></span><span class="card-arrow">→</span></div>
         </a>
@@ -610,9 +596,9 @@
         <a class="card" href="/projects/agi-research-intelligence/" style="--pc: #6a3aa3;">
           <div class="card-sector">Research Intelligence</div>
           <div class="card-title">AGI Research Intelligence Platform</div>
-          <p class="card-desc">A group of AI agents that finds new research papers on general AI and scores how much each one matters.</p>
+          <p class="card-desc">A group of AI agents that finds new research papers on general AI and scores how much each one matters. A planner, a discovery agent and an evaluation agent work in sequence, scoring every paper against the same ten measures. A review that took weeks now takes hours, with three to five times the coverage.</p>
           <div class="card-tags card-logos">
-            <img src="/projects/logos/langgraph.svg" alt="LangGraph" loading="lazy" /><span class="lg"><img src="/projects/logos/arxiv.svg" alt="" loading="lazy" />arXiv</span><span class="lg"><img src="/projects/logos/openai.svg" alt="" style="--s: 1.7;" loading="lazy" />OpenAI</span>
+            <span><img src="/projects/logos/langgraph.svg" alt="LangGraph" loading="lazy" /></span><span class="lg"><img src="/projects/logos/arxiv.svg" alt="" loading="lazy" />arXiv</span><span class="lg"><img src="/projects/logos/openai.svg" alt="" style="--s: 1.5;" loading="lazy" />OpenAI</span>
           </div>
           <div class="card-footer"><span class="card-note"></span><span class="card-arrow">→</span></div>
         </a>
@@ -620,9 +606,9 @@
         <a class="card" href="/projects/linkedin-post-generator/" style="--pc: #0b6589;">
           <div class="card-sector">Content Intelligence</div>
           <div class="card-title">LinkedIn Post Generator</div>
-          <p class="card-desc">An AI writing team where nothing gets shared until a critic is happy.</p>
+          <p class="card-desc">An AI writing team where nothing gets shared until a critic is happy. A researcher gathers material, a writer drafts the post, and a critic scores it against a quality checklist. A supervisor sends the draft back until it passes.</p>
           <div class="card-tags card-logos">
-            <img src="/projects/logos/langgraph.svg" alt="LangGraph" loading="lazy" /><img src="/projects/logos/langchain.svg" alt="LangChain" loading="lazy" /><span class="lg"><img src="/projects/logos/openai.svg" alt="" style="--s: 1.7;" loading="lazy" />OpenAI</span>
+            <span><img src="/projects/logos/langgraph.svg" alt="LangGraph" loading="lazy" /></span><span><img src="/projects/logos/langchain.svg" alt="LangChain" loading="lazy" /></span><span class="lg"><img src="/projects/logos/openai.svg" alt="" style="--s: 1.5;" loading="lazy" />OpenAI</span>
           </div>
           <div class="card-footer"><span class="card-note"></span><span class="card-arrow">→</span></div>
         </a>
@@ -630,9 +616,9 @@
         <a class="card" href="/projects/healthcare-intelligence-assistant/" style="--pc: #a32b45;">
           <div class="card-sector">Healthcare · Data Governance</div>
           <div class="card-title">Healthcare Intelligence Assistant</div>
-          <p class="card-desc">Lets clinicians ask questions about their data in simple English, safely.</p>
+          <p class="card-desc">Lets clinicians ask questions about their data in simple English, safely. Every query is classified before it runs: reads run automatically, changes need human approval, and unsafe requests are rejected. A full audit trail keeps it within HIPAA and GDPR.</p>
           <div class="card-tags card-logos">
-            <img src="/projects/logos/langgraph.svg" alt="LangGraph" loading="lazy" />
+            <span><img src="/projects/logos/langgraph.svg" alt="LangGraph" loading="lazy" /></span>
           </div>
           <div class="card-footer"><span class="card-note"></span><span class="card-arrow">→</span></div>
         </a>
@@ -640,9 +626,9 @@
         <a class="card" href="/projects/mucatlas/" style="--pc: #1e3a5f;">
           <div class="card-sector">Public Sector · Knowledge Management</div>
           <div class="card-title">MucAtlas — Municipal Knowledge Agent</div>
-          <p class="card-desc">A simple plan for helping Munich’s caseworkers find trusted answers fast, while keeping citizens’ data under the city’s control.</p>
+          <p class="card-desc">A simple plan for helping Munich’s caseworkers find trusted answers fast, while keeping citizens’ data under the city’s control. Five agents search the city’s sources, check that legal documents are still in force, and warn when two sources disagree. Every answer comes with its references.</p>
           <div class="card-tags card-logos">
-            <img src="/projects/logos/muenchen.svg" alt="Landeshauptstadt München" style="--s: 1.25;" loading="lazy" /><img src="/projects/logos/mcp.svg" alt="Model Context Protocol" style="--s: 0.9;" loading="lazy" />
+            <span><img src="/projects/logos/muenchen.svg" alt="Landeshauptstadt München" style="--s: 1.25;" loading="lazy" /></span><span><img src="/projects/logos/mcp.svg" alt="Model Context Protocol" style="--s: 0.85;" loading="lazy" /></span>
           </div>
           <div class="card-footer"><span class="card-note">Architecture &amp; design — competition entry</span><span class="card-arrow">→</span></div>
         </a>
@@ -650,9 +636,9 @@
         <a class="card" href="/projects/warehouse-robot-navigation/" style="--pc: #4b5563;">
           <div class="card-sector">Logistics &amp; Robotics</div>
           <div class="card-title">Warehouse Robot Navigation</div>
-          <p class="card-desc">A robot that learns to move around a warehouse on its own, even in layouts it has never seen.</p>
+          <p class="card-desc">A robot that learns to move around a warehouse on its own, even in layouts it has never seen. It learns by trial and error instead of following routes programmed by hand. When the layout changes, nothing needs to be rewritten.</p>
           <div class="card-tags card-logos">
-            <span class="lg"><img src="/projects/logos/openai.svg" alt="" style="--s: 1.7;" loading="lazy" />OpenAI</span><span class="lg"><img src="/projects/logos/stable-baselines3.png" alt="" style="--s: 1.25;" loading="lazy" />Stable Baselines3</span>
+            <span class="lg"><img src="/projects/logos/openai.svg" alt="" style="--s: 1.5;" loading="lazy" />OpenAI</span><span class="lg"><img src="/projects/logos/stable-baselines3.png" alt="" style="--s: 1.3;" loading="lazy" />Stable Baselines3</span>
           </div>
           <div class="card-footer"><span class="card-note"></span><span class="card-arrow">→</span></div>
         </a>
@@ -660,7 +646,7 @@
         <a class="card" href="/projects/tennis-oracle/" style="--pc: #5f6b14;">
           <div class="card-sector">Sports Analytics &middot; Agent Protocol</div>
           <div class="card-title">Tennis Oracle — Deterministic Match Prediction</div>
-          <p class="card-desc">Uses a rating system built on a million matches to predict tennis results, and tests AI against it head to head.</p>
+          <p class="card-desc">Uses a rating system built on a million matches to predict tennis results, and tests AI against it head to head. It rates every ATP and WTA player, down to events no bookmaker prices. In a blind test of 197 matches the ratings beat the AI analyst by 7.6 points, so the AI only writes the commentary.</p>
           <div class="card-tags card-logos">
             <span class="lg"><img src="/projects/logos/a2a.svg" alt="" loading="lazy" />A2A</span><span class="lg"><img src="/projects/logos/streamlit.svg" alt="" loading="lazy" />Streamlit</span>
           </div>
