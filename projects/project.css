@@ -236,29 +236,36 @@ h1 {
   color: var(--accent);
   margin-bottom: 0.7rem;
 }
-/* Official product logos, unaltered, each on a plain white chip with clear space */
-.p-logos { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem; margin-bottom: 1rem; }
-.p-logo {
+/* Built-with list. An item with a brand logo shows the official, unaltered
+   logo on its own white panel, with the item text beside it. */
+.card-tags { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0.5rem; }
+.tag {
   display: inline-flex;
   align-items: center;
-  padding: 0.65rem 0.95rem;
-  min-height: 3.6rem;
-  background: #fff;
-  border: 1.5px solid var(--ink-light);
-  border-radius: 4px;
-  transition: border-color 0.15s;
-}
-.p-logo:hover { border-color: var(--accent); }
-.p-logo img { display: block; width: auto; }
-.card-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
-.tag {
   background: var(--tag-bg);
   color: var(--tag-text);
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   font-weight: 500;
-  padding: 0.25rem 0.55rem;
-  border-radius: 2px;
-  letter-spacing: 0.03em;
+  padding: 0.5rem 0.8rem;
+  min-height: 3.4rem;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+}
+.tag.has-logo {
+  padding: 0;
+  background: #fff;
+  border: 1.5px solid var(--ink-light);
+  overflow: hidden;
+}
+.tag-logo { display: flex; align-items: center; align-self: stretch; padding: 0.6rem 0.85rem; background: #fff; }
+.tag-logo img { display: block; width: auto; max-width: none; }
+.tag.has-logo > span {
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  padding: 0.5rem 0.8rem;
+  background: var(--tag-bg);
+  border-left: 1.5px solid var(--ink-light);
 }
 
 .p-cta {
